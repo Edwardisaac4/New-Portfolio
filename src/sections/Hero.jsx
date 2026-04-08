@@ -26,7 +26,7 @@ const Hero = () => {
                 delay,
                 ease: "none",
                 onUpdate: function () {
-                    const p     = this.targets()[0].progress;
+                    const p = this.targets()[0].progress;
                     const resolved = Math.floor(p * len); // chars that are final
                     let display = "";
 
@@ -61,30 +61,30 @@ const Hero = () => {
             duration: 1.6,
         })
 
-        // 2. H1 lines: clip-path slide-up reveal, staggered
-        .from(".hero-text h1", {
-            y: 80,
-            opacity: 0,
-            clipPath: "inset(100% 0% 0% 0%)",
-            stagger: 0.18,
-            duration: 1,
-            ease: "power4.out",
-        }, "-=1.0")
+            // 2. H1 lines: clip-path slide-up reveal, staggered
+            .from(".hero-text h1", {
+                y: 80,
+                opacity: 0,
+                clipPath: "inset(100% 0% 0% 0%)",
+                stagger: 0.18,
+                duration: 1,
+                ease: "power4.out",
+            }, "-=1.0")
 
-        // 3. Subtitle paragraph: gentle drift up + fade
-        .from(".hero-subtitle", {
-            y: 24,
-            opacity: 0,
-            duration: 0.75,
-        }, "-=0.5")
+            // 3. Subtitle paragraph: gentle drift up + fade
+            .from(".hero-subtitle", {
+                y: 24,
+                opacity: 0,
+                duration: 0.75,
+            }, "-=0.5")
 
-        // 4. CTA Button: scale + fade with a satisfying snap
-        .from("#button", {
-            scale: 0.78,
-            opacity: 0,
-            duration: 0.55,
-            ease: "back.out(1.7)",
-        }, "-=0.35");
+            // 4. CTA Button: scale + fade with a satisfying snap
+            .from("#button", {
+                scale: 0.78,
+                opacity: 0,
+                duration: 0.55,
+                ease: "back.out(1.7)",
+            }, "-=0.35");
 
         // 5. Scramble the two static h1s after their reveal lands
         //    Delay is timed so scramble starts just as each h1 finishes revealing.
@@ -155,7 +155,7 @@ const Hero = () => {
                 </figure>
             </div>
 
-            <AnimatedCounter/>
+            <AnimatedCounter />
         </section>
     )
 }
