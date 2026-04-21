@@ -31,7 +31,7 @@ const projects = [
         desc: 'A High End Landing Page with Smooth Animations and Responsive Design',
         tech: ['React', 'Tailwind CSS', 'JavaScript'],
         media: { type: 'video', src: '/images/project1.mp4' },
-        link: 'https://github.com/yourusername/project2'
+        link: 'https://github.com/Edwardisaac4/new-gaming'
     }
 ]
 
@@ -244,7 +244,7 @@ const ShowCase = () => {
                         </p>
                         <div className="flex flex-wrap gap-2 mt-1">
                             {activeProject.tech.map((t) => (
-                                <span key={t} className="px-2.5 py-1 text-[10px] sm:text-xs font-mono rounded-full bg-white/[0.06] border border-white/10 text-white/60">
+                                <span key={t} className="px-2.5 py-1 text-[10px] sm:text-xs font-mono rounded-full bg-white/6 border border-white/10 text-white/60">
                                     {t}
                                 </span>
                             ))}
@@ -275,7 +275,7 @@ const ShowCase = () => {
                     <div className="absolute bottom-0 -right-1/4 w-2/3 h-2/3 rounded-full bg-purple-600/[0.07] blur-[160px]" />
                 </div>
 
-                <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12">
+                <div className="max-w-7xl mx-auto px-5 md:px-10">
 
                     {/* Section header */}
                     <div className="mb-14 sm:mb-20 lg:mb-28">
@@ -283,7 +283,7 @@ const ShowCase = () => {
                             Portfolio
                         </p>
                         <h2 className="text-5xl sm:text-6xl lg:text-8xl font-black leading-[0.95] tracking-tight bg-clip-text text-transparent bg-linear-to-br from-white via-white/90 to-white/30">
-                            Selected<br />Works
+                            The<br />Work
                         </h2>
                     </div>
 
@@ -319,7 +319,7 @@ const ShowCase = () => {
                                             {/* Tech stack */}
                                             <div className="flex flex-wrap gap-1.5 sm:gap-2 mt-1">
                                                 {project.tech.map((t) => (
-                                                    <span key={t} className="px-2.5 py-[5px] text-[9px] sm:text-[10px] font-mono rounded-full bg-white/[0.05] border border-white/[0.09] text-white/50 tracking-wide">
+                                                    <span key={t} className="px-2.5 py-[5px] text-[9px] sm:text-[10px] font-mono rounded-full bg-white/5 border border-white/9 text-white/50 tracking-wide">
                                                         {t}
                                                     </span>
                                                 ))}
@@ -346,22 +346,22 @@ const ShowCase = () => {
                                                 <div className="absolute -inset-3 rounded-2xl sm:rounded-3xl bg-linear-to-br from-blue-500/20 to-purple-600/20 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 -z-10" />
 
                                                 {/* Device frame */}
-                                                <div className="relative rounded-xl sm:rounded-2xl lg:rounded-[20px] overflow-hidden border border-white/[0.08] bg-[#111] shadow-2xl shadow-black/60 group-hover:border-white/[0.16] group-hover:shadow-blue-500/10 transition-all duration-500">
+                                                <div className="relative rounded-xl sm:rounded-2xl lg:rounded-[20px] overflow-hidden border border-white/8 bg-[#111] shadow-2xl shadow-black/60 group-hover:border-white/16 group-hover:shadow-blue-500/10 transition-all duration-500">
 
                                                     {/* Browser chrome bar */}
-                                                    <div className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-3 bg-white/[0.03] border-b border-white/[0.06]">
+                                                    <div className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-3 bg-white/3 border-b border-white/6">
                                                         <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-red-500/50" />
                                                         <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-yellow-500/50" />
                                                         <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-green-500/50" />
                                                         {/* Fake URL bar */}
-                                                        <div className="flex-1 ml-1 sm:ml-2 h-[18px] sm:h-5 rounded-md bg-white/[0.04] flex items-center px-2 hidden sm:flex">
+                                                        <div className="flex-1 ml-1 sm:ml-2 h-[18px] sm:h-5 rounded-md bg-white/4 items-center px-2 hidden sm:flex">
                                                             <span className="w-1 h-1 rounded-full bg-white/20 mr-1.5" />
                                                             <div className="flex-1 h-[3px] bg-white/8 rounded-full" />
                                                         </div>
                                                     </div>
 
                                                     {/* Media viewport */}
-                                                    <div className="relative aspect-[16/10] w-full overflow-hidden bg-black">
+                                                    <div className="relative aspect-16/10 w-full overflow-hidden bg-black">
                                                         <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
                                                         {/* Parallax container */}
