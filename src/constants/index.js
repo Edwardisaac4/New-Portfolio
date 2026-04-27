@@ -119,34 +119,44 @@ const techStackImgs = [
 
 const techStackIcons = [
   {
-    name: "React Developer",
-    modelPath: "/models/react_logo-transformed.glb",
-    scale: 1,
-    rotation: [0, 0, 0],
+    name: "React",
+    iconPath: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+    color: "#61DAFB",
   },
   {
-    name: "Python Developer",
-    modelPath: "/models/python-transformed.glb",
-    scale: 0.8,
-    rotation: [0, 0, 0],
+    name: "TypeScript",
+    iconPath: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
+    color: "#3178C6",
   },
   {
-    name: "Backend Developer",
-    modelPath: "/models/node-transformed.glb",
-    scale: 5,
-    rotation: [0, -Math.PI / 2, 0],
+    name: "JavaScript",
+    iconPath: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+    color: "#F7DF1E",
   },
   {
-    name: "Interactive Developer",
-    modelPath: "/models/three.js-transformed.glb",
-    scale: 0.05,
-    rotation: [0, 0, 0],
+    name: "Tailwind CSS",
+    iconPath: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg",
+    color: "#06B6D4",
   },
   {
-    name: "Project Manager",
-    modelPath: "/models/git-svg-transformed.glb",
-    scale: 0.05,
-    rotation: [0, -Math.PI / 4, 0],
+    name: "HTML5",
+    iconPath: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
+    color: "#E34F26",
+  },
+  {
+    name: "CSS",
+    iconPath: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
+    color: "#1572B6",
+  },
+  {
+    name: "WordPress",
+    iconPath: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-plain.svg",
+    color: "#21759B",
+  },
+  {
+    name: "Vite",
+    iconPath: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vitejs/vitejs-original.svg",
+    color: "#646CFF",
   },
 ];
 
@@ -161,6 +171,11 @@ const expCards = [
       "Building and maintaining modern, responsive web applications.",
       "Collaborating with the team to implement new features and improve UI/UX.",
       "Optimizing web applications for maximum speed and scalability.",
+      "Sustaining Network Infrastructure.",
+      "Installing and Configuring Softwares.",
+      "Troubleshooting Hardware and Software Issues.",
+      "Data Backup and Recovery.",
+      "Network Security Management",
     ],
   },
   {
@@ -236,20 +251,24 @@ const testimonials = [
 
 const socialImgs = [
   {
-    name: "insta",
-    imgPath: "/images/insta.png",
+    name: "Instagram",
+    imgPath: "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg",
+    url: "https://x.com/isaacdrumz4",
   },
   {
-    name: "fb",
-    imgPath: "/images/fb.png",
+    name: "WhatsApp",
+    imgPath: "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg",
+    url: "https://wa.me/2347087374423",
   },
   {
-    name: "x",
-    imgPath: "/images/x.png",
+    name: "X",
+    imgPath: "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/x.svg",
+    url: "https://x.com/isaacdrumz4",
   },
   {
-    name: "linkedin",
-    imgPath: "/images/linkedin.png",
+    name: "LinkedIn",
+    imgPath: "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg",
+    url: "https://www.linkedin.com/in/edward-isaac-5b7544310//",
   },
 ];
 

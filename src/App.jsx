@@ -3,7 +3,8 @@ import ShowCase from './sections/ShowCase.jsx'
 import NavBar from './components/NavBar.jsx'
 import FeaturedCards from './sections/FeaturedCards.jsx'
 import Experience from './sections/Experience.jsx'
-
+import TechStack from './sections/TechStack.jsx'
+import Contact from './sections/Contact.jsx'
 const App = () => {
   return (
     <>
@@ -11,7 +12,9 @@ const App = () => {
       <Hero />
       <ShowCase />
       <FeaturedCards />
-      <Experience/>
+      <Experience />
+      <TechStack />
+      <Contact />
     </>
   )
 }

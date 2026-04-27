@@ -472,3 +472,27 @@ section {
 .card:hover::before {
   opacity: 1;
 }
+
+/* Tech Stack Section */
+@keyframes techFloat {
+  0%,
+  100% {
+    transform: translateZ(40px) translateY(0);
+  }
+  50% {
+    transform: translateZ(40px) translateY(-10px);
+  }
+}
+
+.tech-marquee-track {
+  animation: techMarquee 40s linear infinite;
+}
+
+@keyframes techMarquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-33.333%);
+  }
+}
