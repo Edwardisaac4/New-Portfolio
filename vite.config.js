@@ -10,4 +10,7 @@ export default defineConfig({
     babel({ presets: [reactCompilerPreset()] }),
     tailwindcss(),
   ],
+  build: {
+    chunkSizeWarningLimit: 2000, // Increase limit from 500kB to 2MB to hide Three.js warnings
+  }
 })
