@@ -20,7 +20,7 @@ const EarthGlobe = () => {
 
   return (
     <Float speed={1.5} rotationIntensity={0.5} floatIntensity={0.5}>
-      <Sphere ref={sphereRef} args={[1, 64, 64]} scale={1.8}>
+      <Sphere ref={sphereRef} args={[1, 32, 32]} scale={1.8}>
         <meshStandardMaterial 
           map={colorMap} 
           roughness={0.6} 
@@ -81,6 +81,7 @@ const About = () => {
                src="/images/eddie_pic-removebg-preview.png" 
                alt="Isaac Edward" 
                className="w-[130%] h-auto object-contain object-bottom relative z-10 drop-shadow-2xl transition-transform duration-500 group-hover:scale-105 -mb-6 md:-mb-10" 
+               loading="lazy"
             />
           </div>
 

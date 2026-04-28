@@ -7,10 +7,6 @@ import AnimatedCounter from "../components/AnimatedCounter.jsx"
 
 const Hero = () => {
     useGSAP(() => {
-        const CHARSET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
-
-
-
         // Master timeline — all clips start invisible
         const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 

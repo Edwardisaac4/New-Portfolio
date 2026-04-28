@@ -1,13 +1,15 @@
-import { SpeedInsights } from '@vercel/speed-insights/react'
+import { lazy, Suspense } from 'react'
 import Hero from './sections/Hero.jsx'
-import About from './sections/About.jsx'
-import ShowCase from './sections/ShowCase.jsx'
 import NavBar from './components/NavBar.jsx'
-import FeaturedCards from './sections/FeaturedCards.jsx'
-import Experience from './sections/Experience.jsx'
-import TechStack from './sections/TechStack.jsx'
-import Contact from './sections/Contact.jsx'
-import Footer from './sections/Footer.jsx'
+
+// Lazy-load all below-fold sections so the initial bundle is small and fast
+const About = lazy(() => import('./sections/About.jsx'))
+const ShowCase = lazy(() => import('./sections/ShowCase.jsx'))
+const FeaturedCards = lazy(() => import('./sections/FeaturedCards.jsx'))
+const Experience = lazy(() => import('./sections/Experience.jsx'))
+const TechStack = lazy(() => import('./sections/TechStack.jsx'))
+const Contact = lazy(() => import('./sections/Contact.jsx'))
+const Footer = lazy(() => import('./sections/Footer.jsx'))
 
 const App = () => {
 
@@ -15,14 +17,15 @@ const App = () => {
     <div className="bg-black overflow-hidden">
       <NavBar />
       <Hero />
-      <About />
-      <ShowCase />
-      <FeaturedCards />
-      <Experience />
-      <TechStack />
-      <Contact />
-      <Footer />
-      <SpeedInsights />
+      <Suspense fallback={null}>
+        <About />
+        <ShowCase />
+        <FeaturedCards />
+        <Experience />
+        <TechStack />
+        <Contact />
+        <Footer />
+      </Suspense>
     </div>
   )
 }

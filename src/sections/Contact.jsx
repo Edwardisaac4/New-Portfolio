@@ -21,7 +21,7 @@ const AbstractGlobe = () => {
 
   return (
     <Float speed={2} rotationIntensity={1} floatIntensity={2}>
-      <Sphere ref={sphereRef} args={[1, 64, 64]} scale={2.2}>
+      <Sphere ref={sphereRef} args={[1, 32, 32]} scale={2.2}>
         <MeshDistortMaterial
           color="#52aeff"
           attach="material"
@@ -60,6 +60,7 @@ const Contact = () => {
           pin: true,
           scrub: 1,
           anticipatePin: 1,
+          pinReparent: true,
         },
       });
 
@@ -77,6 +78,9 @@ const Contact = () => {
         { x: 0, opacity: 1, rotateY: 0, duration: 1, ease: "power3.out" },
         "-=0.6"
       );
+
+      // Hold at end so the unpin doesn't snap immediately
+      tl.to({}, { duration: 0.5 });
 
       // Magnetic Button effect for submit
       const btn = formRef.current?.querySelector(".magnetic-btn");

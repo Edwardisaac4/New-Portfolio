@@ -157,10 +157,11 @@ const TechStack = () => {
                 scrollTrigger: {
                     trigger: sectionRef.current,
                     start: "top top",
-                    end: "+=1400", // Reduced from 2200 to make the scroll faster
+                    end: "+=1400",
                     pin: true,
-                    scrub: 0.5, // Tighter scrub for faster response
+                    scrub: 0.5,
                     anticipatePin: 1,
+                    pinReparent: true,
                 },
             });
 
@@ -169,7 +170,7 @@ const TechStack = () => {
                 y: 0,
                 opacity: 1,
                 rotateZ: 0,
-                stagger: 0.02, // Sped up character animation
+                stagger: 0.02,
                 ease: "power3.out",
             })
                 // Animate subtitle
@@ -182,13 +183,13 @@ const TechStack = () => {
                         opacity: 1,
                         rotateX: 0,
                         scale: 1,
-                        stagger: { amount: 0.7, from: "center", grid: "auto" }, // Sped up card reveal
+                        stagger: { amount: 0.7, from: "center", grid: "auto" },
                         ease: "power3.out",
                     },
                     "-=0.2",
                 )
-                // Hold at end
-                .to({}, { duration: 0.3 });
+                // Hold at end so unpin is smooth — gives user time to read before scroll resumes
+                .to({}, { duration: 0.6 });
 
             // Marquee infinite scroll
             const marqueeTrack = sectionRef.current?.querySelector(".tech-marquee-track");

@@ -72,7 +72,7 @@ const Experience = () => {
                 <Glowcard card={card}>
                   <div className="flex items-center gap-4 mt-5">
                     <div className="w-14 h-14 bg-black-200/80 backdrop-blur-sm rounded-full flex items-center justify-center p-2 shadow-[inset_0_0_20px_rgba(255,255,255,0.05)] drop-shadow-xl group-hover:scale-110 transition-transform duration-500">
-                      <img src={card.logoPath} alt={card.title} className="w-full h-full object-contain" />
+                      <img src={card.logoPath} alt={card.title} className="w-full h-full object-contain" loading="lazy" />
                     </div>
                     <div>
                       <p className="text-white font-semibold text-lg">{card.title}</p>

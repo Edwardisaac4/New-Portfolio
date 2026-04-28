@@ -1,4 +1,4 @@
-import React, { useRef, useState, useCallback } from 'react'
+import React, { useRef, useState, useCallback, useEffect } from 'react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/all'
@@ -7,6 +7,31 @@ gsap.registerPlugin(ScrollTrigger)
 
 // Reduce ScrollTrigger callback overhead globally
 ScrollTrigger.config({ limitCallbacks: true, ignoreMobileResize: true })
+
+// Auto-play videos when they scroll into view
+const useVideoAutoPlay = (containerRef) => {
+    useEffect(() => {
+        if (!containerRef.current) return;
+        const videos = containerRef.current.querySelectorAll('video[preload="none"]');
+        if (!videos.length) return;
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.play().catch(() => {});
+                    } else {
+                        entry.target.pause();
+                    }
+                });
+            },
+            { threshold: 0.25 }
+        );
+
+        videos.forEach((video) => observer.observe(video));
+        return () => observer.disconnect();
+    }, [containerRef]);
+};
 
 const projects = [
     {
@@ -40,6 +65,9 @@ const ShowCase = () => {
     const expandedRef = useRef(null)
     const [activeProject, setActiveProject] = useState(null)
     const isAnimating = useRef(false)
+
+    // Auto-play videos when they scroll into view (deferred loading)
+    useVideoAutoPlay(containerRef)
 
     useGSAP(() => {
         const mm = gsap.matchMedia()
@@ -369,8 +397,8 @@ const ShowCase = () => {
                                                             {project.media.type === 'video' ? (
                                                                 <video
                                                                     src={project.media.src}
-                                                                    loop playsInline muted autoPlay
-                                                                    preload="metadata"
+                                                                    loop playsInline muted
+                                                                    preload="none"
                                                                     className="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-700"
                                                                 />
                                                             ) : (

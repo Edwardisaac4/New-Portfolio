@@ -102,6 +102,7 @@ const FeatureCard = ({ imgPath, title, desc, index }) => {
                             src={imgPath} 
                             alt={title} 
                             className="size-10 md:size-12 object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.4)]" 
+                            loading="lazy"
                         />
                     </div>
                     <h3 className="text-xl md:text-2xl font-bold text-white drop-shadow-md transition-colors duration-500 md:group-hover:text-blue-50">
