@@ -39,7 +39,7 @@ const projects = [
         title: 'Movie Landing Page',
         desc: 'A responsive website that allows users to browse and search for movies and anime. It features a modern UI with a dark theme and smooth animations. The website is built with Vanilla JS, HTML, CSS and uses the IMDB API to fetch movie and anime data.',
         tech: ['HTML', 'CSS', 'Vanilla JS', 'IMDB API'],
-        media: { type: 'video', src: '/images/project3.mp4' },
+        media: { type: 'video', src: '/images/project3.mp4', poster: '/images/project3.png' },
         link: 'https://github.com/yourusername/project1'
     },
     {
@@ -55,7 +55,7 @@ const projects = [
         title: 'Zentry Clone',
         desc: 'A High End Landing Page with Smooth Animations and Responsive Design',
         tech: ['React', 'Tailwind CSS', 'JavaScript'],
-        media: { type: 'video', src: '/images/project1.mp4' },
+        media: { type: 'video', src: '/images/project1.mp4', poster: '/images/project1.png' },
         link: 'https://github.com/Edwardisaac4/new-gaming'
     }
 ]
@@ -392,16 +392,19 @@ const ShowCase = () => {
                                                     <div className="relative aspect-16/10 w-full overflow-hidden bg-black">
                                                         <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
-                                                        {/* Parallax container */}
-                                                        <div className="parallax-media absolute top-[-15%] left-0 w-full h-[130%]" style={{ willChange: 'transform' }}>
-                                                            {project.media.type === 'video' ? (
+                                                        {/* Media container — videos get a lightweight path (no parallax / no hover scale) */}
+                                                        {project.media.type === 'video' ? (
+                                                            <div className="w-full h-full">
                                                                 <video
                                                                     src={project.media.src}
+                                                                    poster={project.media.poster}
                                                                     loop playsInline muted
                                                                     preload="none"
-                                                                    className="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-700"
+                                                                    className="w-full h-full object-cover"
                                                                 />
-                                                            ) : (
+                                                            </div>
+                                                        ) : (
+                                                            <div className="parallax-media absolute top-[-15%] left-0 w-full h-[130%]" style={{ willChange: 'transform' }}>
                                                                 <img
                                                                     src={project.media.src}
                                                                     alt={project.title}
@@ -409,8 +412,8 @@ const ShowCase = () => {
                                                                     decoding="async"
                                                                     className="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-700"
                                                                 />
-                                                            )}
-                                                        </div>
+                                                            </div>
+                                                        )}
                                                     </div>
                                                 </div>
                                             </div>
