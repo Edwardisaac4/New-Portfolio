@@ -1,3 +1,4 @@
+import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/react'
 import Hero from './sections/Hero.jsx'
 import About from './sections/About.jsx'
@@ -22,6 +23,7 @@ const App = () => {
       <TechStack />
       <Contact />
       <Footer />
+      <Analytics />
       <SpeedInsights />
     </div>
   )
