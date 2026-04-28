@@ -111,9 +111,9 @@ const Contact = () => {
     e.preventDefault();
     setLoading(true);
 
-    const serviceID = "service_2x2bgc1"; 
-    const templateID = "template_x20chb5"; 
-    const publicKey = "Oxph2KDjiH8h84J62";
+    const serviceID = import.meta.env.VITE_EMAILJS_SERVICE_ID || "service_2x2bgc1"; 
+    const templateID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "template_x20chb5"; 
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "Oxph2KDjiH8h84J62";
 
     emailjs
       .send(
@@ -157,7 +157,7 @@ const Contact = () => {
             <TitleHeader title="Let's Talk" sub="📬 Ready to innovate together?" />
           </div>
 
-          <div ref={globeContainerRef} className="w-full h-[400px] md:h-[500px] relative pointer-events-none">
+          <div ref={globeContainerRef} className="w-full h-[400px] md:h-[500px] relative">
             {/* Ambient background glow behind globe */}
             <div className="absolute inset-0 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] rounded-full bg-blue-500/20 blur-[100px]" />
             <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
@@ -174,6 +174,8 @@ const Contact = () => {
               <a
                 key={social.name}
                 href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
                 title={social.name}
                 className="w-12 h-12 rounded-full border border-black-50 bg-black-200/50 backdrop-blur-md flex items-center justify-center transition-all duration-300 hover:scale-110 hover:-translate-y-2 hover:bg-blue-500/10 hover:border-blue-400 hover:shadow-[0_0_20px_rgba(82,174,255,0.4)]"
               >
