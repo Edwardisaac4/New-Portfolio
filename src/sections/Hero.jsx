@@ -9,47 +9,7 @@ const Hero = () => {
     useGSAP(() => {
         const CHARSET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
 
-        /**
-         * Scramble-text effect for a single DOM element.
-         * Resolves characters left-to-right as GSAP progress goes 0 → 1.
-         * @param {HTMLElement} el    - Target element
-         * @param {number}      delay - Seconds to wait before starting
-         * @param {number}      dur   - Duration of the scramble in seconds
-         */
-        const scrambleText = (el, delay, dur) => {
-            const original = el.textContent.trim();
-            const len = original.length;
 
-            gsap.to({ progress: 0 }, {
-                progress: 1,
-                duration: dur,
-                delay,
-                ease: "none",
-                onUpdate: function () {
-                    const p = this.targets()[0].progress;
-                    const resolved = Math.floor(p * len); // chars that are final
-                    let display = "";
-
-                    for (let i = 0; i < len; i++) {
-                        if (original[i] === " ") {
-                            // Always preserve real spaces
-                            display += " ";
-                        } else if (i < resolved) {
-                            // Character has resolved — show the real one
-                            display += original[i];
-                        } else {
-                            // Still scrambling — show a random char
-                            display += CHARSET[Math.floor(Math.random() * CHARSET.length)];
-                        }
-                    }
-                    el.textContent = display;
-                },
-                onComplete: function () {
-                    // Guarantee the final text is exactly correct
-                    el.textContent = original;
-                },
-            });
-        };
 
         // Master timeline — all clips start invisible
         const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
@@ -86,15 +46,7 @@ const Hero = () => {
                 ease: "back.out(1.7)",
             }, "-=0.35");
 
-        // 5. Scramble the two static h1s after their reveal lands
-        //    Delay is timed so scramble starts just as each h1 finishes revealing.
-        //    The first h1 (word-slider) is NOT touched — we only target [data-scramble].
-        const scrambleEls = document.querySelectorAll("[data-scramble]");
-        scrambleEls.forEach((el, i) => {
-            // 0.5s stagger between lines — first line starts at 0.6s,
-            // second starts at 1.1s, giving each room to breathe
-            scrambleText(el, 0.6 + i * 0.5, 2.2);
-        });
+
 
         // Subtle continuous float on the 3D canvas figure
         gsap.to(".hero-3d-layout", {
@@ -133,8 +85,8 @@ const Hero = () => {
                                     </span>
                                 </span>
                             </h1>
-                            <h1 data-scramble>Into Real Projects</h1>
-                            <h1 data-scramble>That Deliver Results</h1>
+                            <h1>Into Real Projects</h1>
+                            <h1>That Deliver Results</h1>
                         </div>
 
                         <p className="hero-subtitle pointer-events-none text-white-50 relative z-9 md:text-xl text-lg">
