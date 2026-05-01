@@ -1,6 +1,10 @@
 import { navLinks } from "../constants";
 import { useState, useEffect } from "react";
 
+/**
+ * Main navigation bar component.
+ * Tracks scroll position to apply a blurred, semi-transparent background when scrolled down.
+ */
 const NavBar = () => {
     const [scrolled, setScrolled] = useState(false);
 

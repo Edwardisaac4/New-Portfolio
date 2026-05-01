@@ -126,6 +126,10 @@ const TechCard = ({ icon, index, bentoSize = "normal" }) => {
     );
 };
 
+/**
+ * The TechStack section displaying a list of technologies.
+ * Uses GSAP ScrollTrigger to reveal icons sequentially and a continuous marquee effect.
+ */
 const TechStack = () => {
     const sectionRef = useRef(null);
     const titleRef = useRef(null);

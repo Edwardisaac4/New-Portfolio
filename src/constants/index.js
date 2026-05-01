@@ -1,3 +1,6 @@
+/**
+ * Navigation links for the main website header.
+ */
 const navLinks = [
   {
     name: "Work",
@@ -13,6 +16,9 @@ const navLinks = [
   },
 ];
 
+/**
+ * Words and icons used in the Hero section's animated marquee.
+ */
 const words = [
   { text: "Ideas",       imgPath: "/images/ideas.svg" },
   { text: "Solutions",   imgPath: "/images/concepts.svg" },
@@ -24,48 +30,18 @@ const words = [
   { text: "Innovation",  imgPath: "/images/code.svg" },
 ];
 
+/**
+ * Statistics shown in the Hero/About section counters.
+ */
 const counterItems = [
   { value: 1, suffix: "+", label: "Years of Experience" },
   { value: 10, suffix: "+", label: "Satisfied Clients" },
   { value: 10, suffix: "+", label: "Completed Projects" },
 ];
 
-const logoIconsList = [
-  {
-    imgPath: "/images/logos/company-logo-1.png",
-  },
-  {
-    imgPath: "/images/logos/company-logo-2.png",
-  },
-  {
-    imgPath: "/images/logos/company-logo-3.png",
-  },
-  {
-    imgPath: "/images/logos/company-logo-4.png",
-  },
-  {
-    imgPath: "/images/logos/company-logo-5.png",
-  },
-  {
-    imgPath: "/images/logos/company-logo-6.png",
-  },
-  {
-    imgPath: "/images/logos/company-logo-7.png",
-  },
-  {
-    imgPath: "/images/logos/company-logo-8.png",
-  },
-  {
-    imgPath: "/images/logos/company-logo-9.png",
-  },
-  {
-    imgPath: "/images/logos/company-logo-10.png",
-  },
-  {
-    imgPath: "/images/logos/company-logo-11.png",
-  },
-];
-
+/**
+ * Key abilities/skills displayed in the "Why Hire Me?" FeatureCards section.
+ */
 const abilities = [
   {
     imgPath: "/images/seo.png",
@@ -94,6 +70,9 @@ const abilities = [
   },
 ];
 
+/**
+ * Technologies and tools shown in the TechStack marquee section.
+ */
 const techStackIcons = [
   {
     name: "React",
@@ -137,6 +116,9 @@ const techStackIcons = [
   },
 ];
 
+/**
+ * Work experience entries displayed in the Experience section.
+ */
 const expCards = [
   {
     review: "Edward consistently delivers high-quality features and brings a proactive approach to frontend development.",
@@ -170,62 +152,10 @@ const expCards = [
   }
 ];
 
-const expLogos = [
-  {
-    name: "logo1",
-    imgPath: "/images/logo1.png",
-  },
-  {
-    name: "logo2",
-    imgPath: "/images/logo2.png",
-  },
-];
 
-const testimonials = [
-  {
-    name: "Esther Howard",
-    mentions: "@estherhoward",
-    review:
-      "I can’t say enough good things about Isaac. He was able to take our complex project requirements and turn them into a seamless, functional website. His problem-solving abilities are outstanding.",
-    imgPath: "/images/client1.png",
-  },
-  {
-    name: "Wade Warren",
-    mentions: "@wadewarren",
-    review:
-      "Working with Isaac was a fantastic experience. He transformed our outdated website into a modern, user-friendly platform. His attention to detail and commitment to quality are unmatched. Highly recommend him for any web dev projects.",
-    imgPath: "/images/client3.png",
-  },
-  {
-    name: "Guy Hawkins",
-    mentions: "@guyhawkins",
-    review:
-      "Collaborating with Isaac was an absolute pleasure. His professionalism, promptness, and dedication to delivering exceptional results were evident throughout our project. Isaac's enthusiasm for every facet of development truly stands out. If you're seeking to elevate your website and elevate your brand, Isaac is the ideal partner.",
-    imgPath: "/images/client2.png",
-  },
-  {
-    name: "Marvin McKinney",
-    mentions: "@marvinmckinney",
-    review:
-      "Isaac was a pleasure to work with. He turned our outdated website into a fresh, intuitive platform that’s both modern and easy to navigate. Fantastic work overall.",
-    imgPath: "/images/client5.png",
-  },
-  {
-    name: "Floyd Miles",
-    mentions: "@floydmiles",
-    review:
-      "Isaac’s expertise in web development is truly impressive. He delivered a robust and scalable solution for our e-commerce site, and our online sales have significantly increased since the launch. He’s a true professional!",
-    imgPath: "/images/client4.png",
-  },
-  {
-    name: "Albert Flores",
-    mentions: "@albertflores",
-    review:
-      "Isaac was a pleasure to work with. He understood our requirements perfectly and delivered a website that exceeded our expectations. His skills in both frontend and backend dev are top-notch.",
-    imgPath: "/images/client6.png",
-  },
-];
-
+/**
+ * Social media links displayed in the Footer.
+ */
 const socialImgs = [
   {
     name: "Instagram",
@@ -249,15 +179,55 @@ const socialImgs = [
   },
 ];
 
+/**
+ * Projects displayed in the ShowCase (Work Space) section.
+ */
+const projects = [
+  {
+    id: 0,
+    title: 'Movie Landing Page',
+    desc: 'A responsive website that allows users to browse and search for movies and anime. It features a modern UI with a dark theme and smooth animations. The website is built with Vanilla JS, HTML, CSS and uses the IMDB API to fetch movie and anime data.',
+    tech: ['HTML', 'CSS', 'Vanilla JS', 'IMDB API'],
+    media: { type: 'video', src: '/images/project3.mp4', poster: '/images/project3.png' },
+    link: 'https://github.com/yourusername/project1'
+  },
+  {
+    id: 1,
+    title: 'Ean Jets Booking',
+    desc: 'A high-end private jet charter booking experience focusing on premium design, fast response times, and ease of use.',
+    tech: ['React', 'Tailwind CSS', 'Typescript'],
+    media: { type: 'image', src: '/images/ean-jets.png' },
+    link: 'https://github.com/yourusername/project2'
+  },
+  {
+    id: 2,
+    title: 'Zentry Clone',
+    desc: 'A High End Landing Page with Smooth Animations and Responsive Design',
+    tech: ['React', 'Tailwind CSS', 'JavaScript'],
+    media: { type: 'video', src: '/images/project1.mp4', poster: '/images/project1.png' },
+    link: 'https://github.com/Edwardisaac4/new-gaming'
+  }
+];
+
+/**
+ * Footer navigation links.
+ */
+const menuLinks = [
+  { label: "Home", href: "#hero" },
+  { label: "About", href: "#about" },
+  { label: "Experience", href: "#experience" },
+  { label: "Skills", href: "#skills" },
+  { label: "Contact", href: "#contact" },
+];
+
 export {
   words,
   abilities,
-  logoIconsList,
   counterItems,
   expCards,
-  expLogos,
-  testimonials,
   socialImgs,
   techStackIcons,
   navLinks,
+  projects,
+  menuLinks,
 };

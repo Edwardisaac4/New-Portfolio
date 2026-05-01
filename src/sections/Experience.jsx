@@ -13,12 +13,12 @@ const Experience = () => {
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       const cards = gsap.utils.toArray(".exp-card-wrapper");
-      
+
       cards.forEach((card) => {
-        gsap.fromTo(card, 
+        gsap.fromTo(card,
           { opacity: 0, y: 50 },
           {
-            opacity: 1, 
+            opacity: 1,
             y: 0,
             duration: 1,
             ease: "power3.out",

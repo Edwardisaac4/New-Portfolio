@@ -1,4 +1,4 @@
-import React, { useRef, useLayoutEffect, Suspense } from "react";
+import { useRef, useLayoutEffect, Suspense } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import TitleHeader from "../components/TitleHeader";
@@ -31,6 +31,11 @@ const EarthGlobe = () => {
   );
 };
 
+/**
+ * The About section.
+ * Features a dynamic 3D globe, animated counters, and personal bio information.
+ * Uses GSAP ScrollTrigger to animate elements into view as the user scrolls.
+ */
 const About = () => {
   const gridRef = useRef(null);
 

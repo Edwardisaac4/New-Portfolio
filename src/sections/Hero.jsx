@@ -5,6 +5,10 @@ import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import AnimatedCounter from "../components/AnimatedCounter.jsx"
 
+/**
+ * The Hero section of the portfolio.
+ * Displays a 3D animated room model, a marquee of words, and introductory text.
+ */
 const Hero = () => {
     useGSAP(() => {
         // Master timeline — all clips start invisible

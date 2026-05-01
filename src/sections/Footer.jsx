@@ -1,10 +1,14 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { socialImgs } from "../constants";
+import { socialImgs, menuLinks } from "../constants";
 
 gsap.registerPlugin(ScrollTrigger);
 
+/**
+ * The main site Footer.
+ * Includes local time tracking, navigation links, social links, and a magnetic 'Back to Top' button.
+ */
 const Footer = () => {
   const footerRef = useRef(null);
   const footerContentRef = useRef(null);
@@ -77,15 +81,6 @@ const Footer = () => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
-
-  // Fixed nav links — "Home" maps to #hero, not #home
-  const menuLinks = [
-    { label: "Home", href: "#hero" },
-    { label: "About", href: "#about" },
-    { label: "Experience", href: "#experience" },
-    { label: "Skills", href: "#skills" },
-    { label: "Contact", href: "#contact" },
-  ];
 
   return (
     <footer

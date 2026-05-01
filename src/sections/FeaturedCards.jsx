@@ -144,6 +144,10 @@ const FeatureCard = ({ imgPath, title, desc, index }) => {
     )
 }
 
+/**
+ * The 'Why Hire Me?' section showcasing key abilities.
+ * Displays 3D flip cards using the FeatureCard component.
+ */
 const FeaturedCards = () => {
     const sectionRef = useRef(null)
 

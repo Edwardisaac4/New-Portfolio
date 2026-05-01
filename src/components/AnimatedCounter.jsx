@@ -6,6 +6,13 @@ import { ScrollTrigger } from "gsap/ScrollTrigger"
 // Register ScrollTrigger to detect scrolling
 gsap.registerPlugin(ScrollTrigger)
 
+/**
+ * Individual animated number item.
+ * Uses GSAP ScrollTrigger to count from 0 to the target value when the element comes into view.
+ * 
+ * @param {Object} props - Component properties.
+ * @param {Object} props.item - The data object containing the value, suffix, and label.
+ */
 const CounterItem = ({ item }) => {
     const numberRef = useRef(null)
 
@@ -48,6 +55,10 @@ const CounterItem = ({ item }) => {
     )
 }
 
+/**
+ * A section displaying a grid of animated counters.
+ * Maps over the counterItems array to render multiple CounterItem components.
+ */
 const AnimatedCounter = () => {
     return (
         <div className="padding-x-lg xl:mt-0 mt-32" id="counter">

@@ -1,7 +1,8 @@
-import React, { useRef, useState, useCallback, useEffect } from 'react'
+import { useRef, useState, useCallback, useEffect } from 'react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/all'
+import { projects } from '../constants'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -33,33 +34,13 @@ const useVideoAutoPlay = (containerRef) => {
     }, [containerRef]);
 };
 
-const projects = [
-    {
-        id: 0,
-        title: 'Movie Landing Page',
-        desc: 'A responsive website that allows users to browse and search for movies and anime. It features a modern UI with a dark theme and smooth animations. The website is built with Vanilla JS, HTML, CSS and uses the IMDB API to fetch movie and anime data.',
-        tech: ['HTML', 'CSS', 'Vanilla JS', 'IMDB API'],
-        media: { type: 'video', src: '/images/project3.mp4', poster: '/images/project3.png' },
-        link: 'https://github.com/yourusername/project1'
-    },
-    {
-        id: 1,
-        title: 'Ean Jets Booking',
-        desc: 'A high-end private jet charter booking experience focusing on premium design, fast response times, and ease of use.',
-        tech: ['React', 'Tailwind CSS', 'Typescript'],
-        media: { type: 'image', src: '/images/ean-jets.png' },
-        link: 'https://github.com/yourusername/project2'
-    },
-    {
-        id: 2,
-        title: 'Zentry Clone',
-        desc: 'A High End Landing Page with Smooth Animations and Responsive Design',
-        tech: ['React', 'Tailwind CSS', 'JavaScript'],
-        media: { type: 'video', src: '/images/project1.mp4', poster: '/images/project1.png' },
-        link: 'https://github.com/Edwardisaac4/new-gaming'
-    }
-]
 
+
+/**
+ * The ShowCase (Work Space) section displaying selected projects.
+ * Features a custom auto-play hook for videos and complex GSAP animations.
+ * When a project is clicked, it expands into a full-screen view.
+ */
 const ShowCase = () => {
     const containerRef = useRef(null)
     const expandedRef = useRef(null)
@@ -294,103 +275,103 @@ const ShowCase = () => {
             {/* ── MAIN SHOWCASE SECTION ── */}
             <section
                 id="work"
-                className="w-full relative py-16 sm:py-24 lg:py-36 text-white overflow-hidden"
+                className="showcase-section"
                 ref={containerRef}
             >
                 {/* Ambient background glows */}
-                <div className="absolute inset-0 overflow-hidden -z-10 pointer-events-none">
-                    <div className="absolute -top-1/4 -left-1/4 w-3/4 h-3/4 rounded-full bg-blue-600/[0.07] blur-[160px]" />
-                    <div className="absolute bottom-0 -right-1/4 w-2/3 h-2/3 rounded-full bg-purple-600/[0.07] blur-[160px]" />
+                <div className="showcase-glow-bg">
+                    <div className="showcase-glow-blue" />
+                    <div className="showcase-glow-purple" />
                 </div>
 
-                <div className="max-w-7xl mx-auto px-5 md:px-10">
+                <div className="showcase-container">
 
                     {/* Section header */}
-                    <div className="mb-14 sm:mb-20 lg:mb-28">
-                        <p className="text-[10px] sm:text-xs font-mono text-blue-400 tracking-[0.25em] uppercase mb-2 sm:mb-3">
+                    <div className="showcase-header">
+                        <p className="showcase-subtitle">
                             Portfolio
                         </p>
-                        <h2 className="text-5xl sm:text-6xl lg:text-8xl font-black leading-[0.95] tracking-tight bg-clip-text text-transparent bg-linear-to-br from-white via-white/90 to-white/30">
+                        <h2 className="showcase-title">
                             The<br />Work
                         </h2>
                     </div>
 
                     {/* Cards */}
-                    <div className="skew-container flex flex-col gap-20 sm:gap-32 lg:gap-48 w-full">
+                    <div className="skew-container showcase-list">
                         {projects.map((project, index) => {
                             const isEven = index % 2 !== 0
                             return (
                                 <div key={project.id} data-project-id={project.id} className="project-item w-full">
-                                    <div className={`flex flex-col gap-8 sm:gap-10 lg:gap-14 lg:flex-row lg:items-center ${isEven ? 'lg:flex-row-reverse' : ''}`}>
+                                    <div className={`project-layout ${isEven ? 'project-layout-reverse' : ''}`}>
 
                                         {/* ── TEXT BLOCK ── */}
-                                        <div className="w-full lg:w-[45%] flex flex-col gap-3 sm:gap-4">
+                                        <div className="project-text-block">
 
                                             {/* Ghost number + label */}
                                             <div className="card-number flex flex-col">
-                                                <span className="text-[6rem] sm:text-[8rem] lg:text-[10rem] font-black leading-none text-white/[0.035] select-none -mb-4 sm:-mb-6 -ml-1 tabular-nums">
+                                                <span className="project-ghost-number">
                                                     {String(index + 1).padStart(2, '0')}
                                                 </span>
-                                                <p className="text-[9px] sm:text-[10px] font-mono text-blue-400 tracking-[0.28em] uppercase font-bold">
+                                                <p className="project-label">
                                                     Project / 0{index + 1}
                                                 </p>
                                             </div>
 
-                                            <h3 className="card-title text-2xl sm:text-3xl lg:text-4xl xl:text-[2.75rem] font-bold leading-[1.1] tracking-tight">
+                                            <h3 className="card-title project-title">
                                                 {project.title}
                                             </h3>
 
-                                            <p className="card-desc text-sm sm:text-[15px] lg:text-base text-white/50 leading-relaxed">
+                                            <p className="card-desc project-desc">
                                                 {project.desc}
                                             </p>
 
                                             {/* Tech stack */}
-                                            <div className="flex flex-wrap gap-1.5 sm:gap-2 mt-1">
+                                            <div className="project-tech-list">
                                                 {project.tech.map((t) => (
-                                                    <span key={t} className="px-2.5 py-[5px] text-[9px] sm:text-[10px] font-mono rounded-full bg-white/5 border border-white/9 text-white/50 tracking-wide">
+                                                    <span key={t} className="project-tech-badge">
                                                         {t}
                                                     </span>
                                                 ))}
                                             </div>
 
                                             {/* CTA */}
-                                            <div className="card-btn mt-2 sm:mt-3">
+                                            <div className="card-btn project-cta-wrapper">
                                                 <button
                                                     onClick={(e) => openProject(project, e.currentTarget.closest('[data-project-id]'))}
-                                                    className="group flex items-center gap-2.5 text-sm sm:text-[15px] font-semibold text-white hover:text-blue-400 transition-colors duration-300 w-fit relative cursor-pointer pb-1.5"
+                                                    className="project-cta-btn"
                                                 >
                                                     Explore Project
-                                                    <span className="inline-block group-hover:translate-x-1.5 transition-transform duration-300">→</span>
-                                                    <div className="absolute bottom-0 left-0 w-0 h-[1.5px] bg-blue-400 group-hover:w-full transition-all duration-300 rounded-full" />
+                                                    <span className="project-cta-arrow">→</span>
+                                                    <div className="project-cta-line" />
                                                 </button>
                                             </div>
                                         </div>
 
                                         {/* ── MEDIA CARD ── */}
-                                        <div className="card-media w-full lg:w-[55%]">
+                                        <div className="card-media project-media-block">
                                             <div className="relative group">
 
                                                 {/* Ambient glow on hover */}
-                                                <div className="absolute -inset-3 rounded-2xl sm:rounded-3xl bg-linear-to-br from-blue-500/20 to-purple-600/20 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 -z-10" />
+                                                <div className="project-media-hover-glow" />
 
                                                 {/* Device frame */}
-                                                <div className="relative rounded-xl sm:rounded-2xl lg:rounded-[20px] overflow-hidden border border-white/8 bg-[#111] shadow-2xl shadow-black/60 group-hover:border-white/16 group-hover:shadow-blue-500/10 transition-all duration-500">
+                                                <div className="project-device-frame">
 
                                                     {/* Browser chrome bar */}
-                                                    <div className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-3 bg-white/3 border-b border-white/6">
-                                                        <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-red-500/50" />
-                                                        <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-yellow-500/50" />
-                                                        <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-green-500/50" />
+                                                    <div className="project-browser-bar">
+                                                        <span className="project-dot project-dot-red" />
+                                                        <span className="project-dot project-dot-yellow" />
+                                                        <span className="project-dot project-dot-green" />
                                                         {/* Fake URL bar */}
-                                                        <div className="flex-1 ml-1 sm:ml-2 h-[18px] sm:h-5 rounded-md bg-white/4 items-center px-2 hidden sm:flex">
-                                                            <span className="w-1 h-1 rounded-full bg-white/20 mr-1.5" />
-                                                            <div className="flex-1 h-[3px] bg-white/8 rounded-full" />
+                                                        <div className="project-url-bar">
+                                                            <span className="project-url-lock" />
+                                                            <div className="project-url-line" />
                                                         </div>
                                                     </div>
 
                                                     {/* Media viewport */}
-                                                    <div className="relative aspect-16/10 w-full overflow-hidden bg-black">
-                                                        <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                                                    <div className="project-viewport">
+                                                        <div className="project-viewport-overlay" />
 
                                                         {/* Media container — videos get a lightweight path (no parallax / no hover scale) */}
                                                         {project.media.type === 'video' ? (
@@ -410,7 +391,7 @@ const ShowCase = () => {
                                                                     alt={project.title}
                                                                     loading="lazy"
                                                                     decoding="async"
-                                                                    className="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-700"
+                                                                    className="project-media-img"
                                                                 />
                                                             </div>
                                                         )}

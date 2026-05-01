@@ -1,6 +1,14 @@
 
 
 
+/**
+ * A reusable call-to-action button that smoothly scrolls to a specified target element on click.
+ * 
+ * @param {Object} props - Component properties.
+ * @param {string} props.className - Additional CSS classes.
+ * @param {string} props.id - The HTML ID of the target element to scroll to.
+ * @param {string} props.text - The text to display inside the button.
+ */
 const Button = ({className, id, text}) => {
     return (
         <a

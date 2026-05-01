@@ -275,6 +275,150 @@ section {
     }
   }
 
+  /* ShowCase (Work Space) Styles */
+  .showcase-section {
+    @apply w-full relative py-16 sm:py-24 lg:py-36 text-white overflow-hidden;
+  }
+
+  .showcase-glow-bg {
+    @apply absolute inset-0 overflow-hidden -z-10 pointer-events-none;
+  }
+
+  .showcase-glow-blue {
+    @apply absolute -top-1/4 -left-1/4 w-3/4 h-3/4 rounded-full bg-blue-600/[0.07] blur-[160px];
+  }
+
+  .showcase-glow-purple {
+    @apply absolute bottom-0 -right-1/4 w-2/3 h-2/3 rounded-full bg-purple-600/[0.07] blur-[160px];
+  }
+
+  .showcase-container {
+    @apply max-w-7xl mx-auto px-5 md:px-10;
+  }
+
+  .showcase-header {
+    @apply mb-14 sm:mb-20 lg:mb-28;
+  }
+
+  .showcase-subtitle {
+    @apply text-[10px] sm:text-xs font-mono text-blue-400 tracking-[0.25em] uppercase mb-2 sm:mb-3;
+  }
+
+  .showcase-title {
+    @apply text-5xl sm:text-6xl lg:text-8xl font-black leading-[0.95] tracking-tight bg-clip-text text-transparent bg-linear-to-br from-white via-white/90 to-white/30;
+  }
+
+  .showcase-list {
+    @apply flex flex-col gap-20 sm:gap-32 lg:gap-48 w-full;
+  }
+
+  .project-layout {
+    @apply flex flex-col gap-8 sm:gap-10 lg:gap-14 lg:flex-row lg:items-center;
+  }
+
+  .project-layout-reverse {
+    @apply lg:flex-row-reverse;
+  }
+
+  .project-text-block {
+    @apply w-full lg:w-[45%] flex flex-col gap-3 sm:gap-4;
+  }
+
+  .project-ghost-number {
+    @apply text-[6rem] sm:text-[8rem] lg:text-[10rem] font-black leading-none text-white/[0.035] select-none -mb-4 sm:-mb-6 -ml-1 tabular-nums;
+  }
+
+  .project-label {
+    @apply text-[9px] sm:text-[10px] font-mono text-blue-400 tracking-[0.28em] uppercase font-bold;
+  }
+
+  .project-title {
+    @apply text-2xl sm:text-3xl lg:text-4xl xl:text-[2.75rem] font-bold leading-[1.1] tracking-tight;
+  }
+
+  .project-desc {
+    @apply text-sm sm:text-[15px] lg:text-base text-white/50 leading-relaxed;
+  }
+
+  .project-tech-list {
+    @apply flex flex-wrap gap-1.5 sm:gap-2 mt-1;
+  }
+
+  .project-tech-badge {
+    @apply px-2.5 py-[5px] text-[9px] sm:text-[10px] font-mono rounded-full bg-white/5 border border-white/10 text-white/50 tracking-wide;
+  }
+
+  .project-cta-wrapper {
+    @apply mt-2 sm:mt-3;
+  }
+
+  .project-cta-btn {
+    @apply group flex items-center gap-2.5 text-sm sm:text-[15px] font-semibold text-white hover:text-blue-400 transition-colors duration-300 w-fit relative cursor-pointer pb-1.5;
+  }
+
+  .project-cta-arrow {
+    @apply inline-block group-hover:translate-x-1.5 transition-transform duration-300;
+  }
+
+  .project-cta-line {
+    @apply absolute bottom-0 left-0 w-0 h-[1.5px] bg-blue-400 group-hover:w-full transition-all duration-300 rounded-full;
+  }
+
+  .project-media-block {
+    @apply w-full lg:w-[55%];
+  }
+
+  .project-media-hover-glow {
+    @apply absolute -inset-3 rounded-2xl sm:rounded-3xl bg-linear-to-br from-blue-500/20 to-purple-600/20 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 -z-10;
+  }
+
+  .project-device-frame {
+    @apply relative rounded-xl sm:rounded-2xl lg:rounded-[20px] overflow-hidden border border-white/10 bg-[#111] shadow-2xl shadow-black/60 group-hover:border-white/20 group-hover:shadow-blue-500/10 transition-all duration-500;
+  }
+
+  .project-browser-bar {
+    @apply flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-3 bg-white/5 border-b border-white/10;
+  }
+
+  .project-dot {
+    @apply w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full;
+  }
+
+  .project-dot-red {
+    @apply bg-red-500/50;
+  }
+
+  .project-dot-yellow {
+    @apply bg-yellow-500/50;
+  }
+
+  .project-dot-green {
+    @apply bg-green-500/50;
+  }
+
+  .project-url-bar {
+    @apply flex-1 ml-1 sm:ml-2 h-[18px] sm:h-5 rounded-md bg-white/5 items-center px-2 hidden sm:flex;
+  }
+
+  .project-url-lock {
+    @apply w-1 h-1 rounded-full bg-white/20 mr-1.5;
+  }
+
+  .project-url-line {
+    @apply flex-1 h-[3px] bg-white/10 rounded-full;
+  }
+
+  .project-viewport {
+    @apply relative aspect-16/10 w-full overflow-hidden bg-black;
+  }
+
+  .project-viewport-overlay {
+    @apply absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none;
+  }
+
+  .project-media-img {
+    @apply w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-700;
+  }
 }
 
 /* Hero text slider starts */

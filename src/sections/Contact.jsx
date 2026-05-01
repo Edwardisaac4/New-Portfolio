@@ -1,4 +1,4 @@
-import React, { useRef, useState, useLayoutEffect } from "react";
+import { useRef, useState, useLayoutEffect } from "react";
 import emailjs from "@emailjs/browser";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -36,6 +36,11 @@ const AbstractGlobe = () => {
   );
 };
 
+/**
+ * The Contact section containing an email form.
+ * Utilizes EmailJS to send messages directly from the client side.
+ * Incorporates 3D Earth model interactions and form validation.
+ */
 const Contact = () => {
   const sectionRef = useRef(null);
   const formRef = useRef(null);
