@@ -108,6 +108,7 @@ const techStackIcons = [
     name: "Shadcn UI",
     iconPath: "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/shadcnui.svg",
     color: "#FFFFFF",
+    isWhite: true,
   },
   {
     name: "GSAP",
@@ -118,6 +119,7 @@ const techStackIcons = [
     name: "Three.js",
     iconPath: "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/threedotjs.svg",
     color: "#FFFFFF",
+    isWhite: true,
   },
   {
     name: "Framer Motion",
@@ -265,7 +267,7 @@ const projects = [
     desc: 'A High End Landing Page with Smooth Animations and Responsive Design.',
     tech: ['HTML', 'CSS', 'JavaScript'],
     media: { type: 'video', src: '/project videos/zentry clone.mp4' },
-    link: 'https://github.com/Edwardisaac4/new-gaming'
+    link: 'https://github.com/Edwardisaac4/Zentry-Clone'
   }
 ];
 

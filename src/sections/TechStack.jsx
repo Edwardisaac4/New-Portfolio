@@ -95,7 +95,7 @@ const TechCard = ({ icon, index, bentoSize = "normal" }) => {
                     src={icon.iconPath}
                     alt={icon.name}
                     className="w-full h-full object-contain"
-                    style={icon.iconPath.includes("simple-icons") ? { filter: "brightness(0) invert(1)" } : {}}
+                    style={icon.isWhite ? { filter: "brightness(0) invert(1)" } : {}}
                     loading="lazy"
                 />
             </div>
