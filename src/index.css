@@ -353,7 +353,7 @@ section {
   }
 
   .project-cta-btn {
-    @apply group flex items-center gap-2.5 text-sm sm:text-[15px] font-semibold text-white hover:text-blue-400 transition-colors duration-300 w-fit relative cursor-pointer pb-1.5;
+    @apply flex items-center gap-2.5 text-sm sm:text-[15px] font-semibold text-white hover:text-blue-400 transition-colors duration-300 w-fit relative cursor-pointer pb-1.5;
   }
 
   .project-cta-arrow {

@@ -9,6 +9,35 @@ gsap.registerPlugin(ScrollTrigger)
 // Reduce ScrollTrigger callback overhead globally
 ScrollTrigger.config({ limitCallbacks: true, ignoreMobileResize: true })
 
+// Image component that falls back to a clean gradient placeholder if it fails to load or is not present
+const ImageWithFallback = ({ src, alt, className, title, ...props }) => {
+    const [failed, setFailed] = useState(false);
+    if (failed || !src) {
+        return (
+            <div className={`${className} bg-linear-to-br from-[#0c0d21] via-[#11122a] to-[#1d0e2e] flex flex-col items-center justify-center border border-white/5 relative overflow-hidden h-full w-full min-h-[220px]`}>
+                {/* Grid Background Pattern */}
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:20px_20px]" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-blue-500/10 blur-3xl rounded-full" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-purple-500/10 blur-3xl rounded-full" />
+                <div className="relative z-10 flex flex-col items-center justify-center p-6 text-center select-none">
+                    <span className="text-[9px] sm:text-[10px] font-mono tracking-[0.2em] text-blue-400/60 uppercase mb-2">Project Preview</span>
+                    <span className="text-xs sm:text-sm font-bold font-display text-white/70 max-w-[200px] truncate">{title}</span>
+                    <span className="text-[9px] text-white/30 mt-3 border border-white/10 px-2 py-0.5 rounded-full font-mono bg-white/5">No Screenshot</span>
+                </div>
+            </div>
+        );
+    }
+    return (
+        <img
+            src={src}
+            alt={alt}
+            onError={() => setFailed(true)}
+            className={className}
+            {...props}
+        />
+    );
+};
+
 // Auto-play videos when they scroll into view
 const useVideoAutoPlay = (containerRef) => {
     useEffect(() => {
@@ -228,9 +257,19 @@ const ShowCase = () => {
                 >
                     <div className="relative w-full h-[42%] shrink-0 overflow-hidden">
                         {activeProject.media.type === 'video' ? (
-                            <video src={activeProject.media.src} autoPlay loop muted playsInline className="w-full h-full object-cover" />
+                            <video 
+                                src={activeProject.media.src} 
+                                poster={activeProject.media.poster}
+                                autoPlay loop muted playsInline 
+                                className="w-full h-full object-cover" 
+                            />
                         ) : (
-                            <img src={activeProject.media.src} alt={activeProject.title} className="w-full h-full object-cover" />
+                            <ImageWithFallback 
+                                src={activeProject.media.src} 
+                                alt={activeProject.title} 
+                                title={activeProject.title}
+                                className="w-full h-full object-cover" 
+                            />
                         )}
                         <div className="absolute bottom-0 left-0 right-0 h-28 bg-linear-to-t from-[#0a0a0a] to-transparent" />
                         <button
@@ -338,7 +377,7 @@ const ShowCase = () => {
                                             <div className="card-btn project-cta-wrapper">
                                                 <button
                                                     onClick={(e) => openProject(project, e.currentTarget.closest('[data-project-id]'))}
-                                                    className="project-cta-btn"
+                                                    className="group project-cta-btn"
                                                 >
                                                     Explore Project
                                                     <span className="project-cta-arrow">→</span>
@@ -386,9 +425,10 @@ const ShowCase = () => {
                                                             </div>
                                                         ) : (
                                                             <div className="parallax-media absolute top-[-15%] left-0 w-full h-[130%]" style={{ willChange: 'transform' }}>
-                                                                <img
+                                                                <ImageWithFallback
                                                                     src={project.media.src}
                                                                     alt={project.title}
+                                                                    title={project.title}
                                                                     loading="lazy"
                                                                     decoding="async"
                                                                     className="project-media-img"

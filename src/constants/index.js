@@ -105,6 +105,26 @@ const techStackIcons = [
     color: "#1572B6",
   },
   {
+    name: "Shadcn UI",
+    iconPath: "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/shadcnui.svg",
+    color: "#FFFFFF",
+  },
+  {
+    name: "GSAP",
+    iconPath: "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/greensock.svg",
+    color: "#88CE02",
+  },
+  {
+    name: "Three.js",
+    iconPath: "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/threedotjs.svg",
+    color: "#FFFFFF",
+  },
+  {
+    name: "Framer Motion",
+    iconPath: "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/framer.svg",
+    color: "#F107A3",
+  },
+  {
     name: "WordPress",
     iconPath: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-plain.svg",
     color: "#21759B",
@@ -188,8 +208,8 @@ const projects = [
     title: 'Movie Landing Page',
     desc: 'A responsive website that allows users to browse and search for movies and anime. It features a modern UI with a dark theme and smooth animations. The website is built with Vanilla JS, HTML, CSS and uses the IMDB API to fetch movie and anime data.',
     tech: ['HTML', 'CSS', 'Vanilla JS', 'IMDB API'],
-    media: { type: 'video', src: '/images/project3.mp4', poster: '/images/project3.png' },
-    link: 'https://github.com/yourusername/project1'
+    media: { type: 'video', src: '/images/project3.mp4' },
+    link: 'https://github.com/Edwardisaac4/movie-Landing-Page'
   },
   {
     id: 1,
@@ -197,14 +217,54 @@ const projects = [
     desc: 'A high-end private jet charter booking experience focusing on premium design, fast response times, and ease of use.',
     tech: ['React', 'Tailwind CSS', 'Typescript'],
     media: { type: 'image', src: '/images/ean-jets.png' },
-    link: 'https://github.com/yourusername/project2'
+    link: 'https://github.com/Edwardisaac4/EanJets'
   },
   {
     id: 2,
+    title: 'Luxe Estates',
+    desc: 'A modern, high-end real estate application featuring seamless property browsing, interactive layouts, smooth animations with Framer Motion, and a polished user interface built for high-end clients.',
+    tech: ['React', 'Vite', 'Tailwind CSS', 'Framer Motion', 'Radix UI', 'Typescript'],
+    media: { type: 'video', src: '/project videos/Luxe.mp4' },
+    link: 'https://github.com/Edwardisaac4/Luxe-Estates'
+  },
+  {
+    id: 3,
+    title: 'EAN Aviation Temp',
+    desc: 'A professional aviation dashboard template built for private jet services, charter flights, and fleet management, focusing on clean information architecture and high performance.',
+    tech: ['React', 'Vite', 'Tailwind CSS', 'Radix UI'],
+    media: { type: 'video', src: '/project videos/EAN.mp4' },
+    link: 'https://github.com/Edwardisaac4/EAN-Aviation-Temp'
+  },
+  {
+    id: 4,
+    title: 'Resume Analyser',
+    desc: 'An AI-powered resume analyzer that allows users to upload PDF resumes, parse the content, and evaluate candidates qualifications against job descriptions using modern frontend parsing and state management.',
+    tech: ['React Router v7', 'Vite', 'Tailwind CSS', 'PDF.js', 'Zustand'],
+    media: { type: 'video', src: '/project videos/SyntaxHire.mp4' },
+    link: 'https://github.com/Edwardisaac4/Resume-Analyzer'
+  },
+  {
+    id: 5,
+    title: 'New Portfolio',
+    desc: 'A premium, highly interactive developer portfolio utilizing Three.js 3D elements, GSAP scroll-triggered animations, and a modern glassmorphism aesthetic to deliver a stunning visual experience.',
+    tech: ['React', 'Vite', 'Three.js', 'React Three Fiber', 'GSAP', 'Tailwind CSS'],
+    media: { type: 'video', src: '/project videos/Portfolio.mp4' },
+    link: 'https://github.com/Edwardisaac4/New-Portfolio'
+  },
+  {
+    id: 6,
+    title: 'New Gaming',
+    desc: 'A visually stunning gaming landing page clone of Zentry featuring complex immersive scroll animations, dynamic video components, custom hover effects, and a highly interactive design.',
+    tech: ['React', 'Vite', 'GSAP', 'Tailwind CSS', 'Framer Motion'],
+    media: { type: 'video', src: '/project videos/new gaming.mp4' },
+    link: 'https://github.com/Edwardisaac4/new-gaming'
+  },
+  {
+    id: 7,
     title: 'Zentry Clone',
-    desc: 'A High End Landing Page with Smooth Animations and Responsive Design',
-    tech: ['React', 'Tailwind CSS', 'JavaScript'],
-    media: { type: 'video', src: '/images/project1.mp4', poster: '/images/project1.png' },
+    desc: 'A High End Landing Page with Smooth Animations and Responsive Design.',
+    tech: ['HTML', 'CSS', 'JavaScript'],
+    media: { type: 'video', src: '/project videos/zentry clone.mp4' },
     link: 'https://github.com/Edwardisaac4/new-gaming'
   }
 ];
