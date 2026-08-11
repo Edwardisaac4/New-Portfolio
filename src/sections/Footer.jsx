@@ -1,9 +1,25 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { socialImgs, menuLinks } from "../constants";
 
 gsap.registerPlugin(ScrollTrigger);
+
+/**
+ * Menu entries mix in-page anchors (#about) with real routes (/contact),
+ * so route links go through React Router while anchors stay plain.
+ */
+const MenuLink = ({ href, children }) =>
+  href.startsWith("/") ? (
+    <Link to={href} className="group flex text-lg text-white transition-colors hover:text-blue-400">
+      {children}
+    </Link>
+  ) : (
+    <a href={href} className="group flex text-lg text-white transition-colors hover:text-blue-400">
+      {children}
+    </a>
+  );
 
 /**
  * The main site Footer.
@@ -145,10 +161,7 @@ const Footer = () => {
               <ul className="flex flex-col gap-2">
                 {menuLinks.map((item) => (
                   <li key={item.label}>
-                    <a
-                      href={item.href}
-                      className="group flex text-lg text-white transition-colors hover:text-blue-400"
-                    >
+                    <MenuLink href={item.href}>
                       <span className="relative overflow-hidden block h-[28px]">
                         <span className="block transition-transform duration-300 group-hover:-translate-y-full">
                           {item.label}
@@ -157,7 +170,7 @@ const Footer = () => {
                           {item.label}
                         </span>
                       </span>
-                    </a>
+                    </MenuLink>
                   </li>
                 ))}
               </ul>

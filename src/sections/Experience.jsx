@@ -1,4 +1,5 @@
 import { useLayoutEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import TitleHeader from "../components/TitleHeader";
@@ -62,7 +63,7 @@ const Experience = () => {
         <TitleHeader title="Professional Work Experience" sub="👩‍💻 My Career Overview" />
 
         <div className="mt-16 md:mt-24 grid grid-cols-1 gap-12 relative z-50">
-          {expCards.map((card) => (
+          {expCards.slice(0, 1).map((card) => (
             <div
               key={card.title}
               className="exp-card-wrapper flex flex-col xl:flex-row gap-8 will-change-transform"
@@ -89,7 +90,7 @@ const Experience = () => {
                   <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 relative z-10">{card.title}</h3>
                   <p className="text-blue-400 text-lg font-medium mb-8 relative z-10">{card.date}</p>
                   <ul className="space-y-5 relative z-10">
-                    {card.responsibilities.map((task, idx) => (
+                    {card.responsibilities.slice(0, 4).map((task, idx) => (
                       <li key={idx} className="flex gap-4 items-start group/item">
                         <div className="w-2 h-2 rounded-full bg-blue-500 mt-2.5 shrink-0 shadow-[0_0_8px_rgba(59,130,246,0.8)] group-hover/item:scale-150 transition-transform duration-300" />
                         <p className="text-white-500 leading-relaxed text-base md:text-lg group-hover/item:text-white-50 transition-colors duration-300">
@@ -102,6 +103,16 @@ const Experience = () => {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* View Full Experience CTA Button */}
+        <div className="mt-14 text-center relative z-50">
+          <Link
+            to="/experience"
+            className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-blue-500 hover:bg-blue-600 text-white font-bold text-sm sm:text-base tracking-wide transition-all duration-300 shadow-[0_0_30px_rgba(59,130,246,0.35)] hover:shadow-[0_0_40px_rgba(59,130,246,0.6)] hover:scale-105"
+          >
+            View Full Experience & Career →
+          </Link>
         </div>
       </div>
     </section>

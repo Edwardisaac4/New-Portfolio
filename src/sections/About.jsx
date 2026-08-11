@@ -1,4 +1,4 @@
-import { useRef, useLayoutEffect, Suspense } from "react";
+import { useRef, useLayoutEffect, Suspense, useState, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import TitleHeader from "../components/TitleHeader";
@@ -9,7 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const EarthGlobe = () => {
   const sphereRef = useRef();
-  const colorMap = useTexture('https://unpkg.com/three-globe/example/img/earth-night.jpg');
+  const colorMap = useTexture('/images/earth-night.jpg');
 
   useFrame(({ clock }) => {
     if (sphereRef.current) {
@@ -28,6 +28,41 @@ const EarthGlobe = () => {
         />
       </Sphere>
     </Float>
+  );
+};
+
+/**
+ * GlobeCanvas — wraps the 3D Canvas with an IntersectionObserver so the
+ * Three.js render loop pauses when the card scrolls out of view.
+ * Saves GPU/CPU during GTmetrix analysis and when users are elsewhere on the page.
+ */
+const GlobeCanvas = () => {
+  const wrapperRef = useRef(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const el = wrapperRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { rootMargin: '100px', threshold: 0 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={wrapperRef} className="w-full h-full absolute inset-0">
+      <Canvas camera={{ position: [0, 0, 5], fov: 45 }} frameloop={inView ? 'always' : 'never'}>
+        <ambientLight intensity={3} />
+        <directionalLight position={[10, 10, 5]} intensity={4} />
+        <directionalLight position={[-10, -10, -5]} intensity={2} />
+        <Suspense fallback={null}>
+          <EarthGlobe />
+        </Suspense>
+        <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={1.5} />
+      </Canvas>
+    </div>
   );
 };
 
@@ -116,17 +151,7 @@ const About = () => {
           <div className="bento-card col-span-1 rounded-3xl border border-white/5 bg-gradient-to-br from-black-200/80 to-black-300/40 backdrop-blur-2xl p-0 relative overflow-hidden group shadow-[0_0_40px_rgba(0,0,0,0.5)] flex items-center justify-center cursor-grab active:cursor-grabbing min-h-[200px]">
              {/* Gradient glow behind globe */}
              <div className="absolute inset-0 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full bg-white-500/10 blur-[40px] pointer-events-none group-hover:bg-blue-500/20 transition-colors duration-500" />
-             <div className="w-full h-full absolute inset-0">
-               <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
-                 <ambientLight intensity={3} />
-                 <directionalLight position={[10, 10, 5]} intensity={4} />
-                 <directionalLight position={[-10, -10, -5]} intensity={2} />
-                 <Suspense fallback={null}>
-                   <EarthGlobe />
-                 </Suspense>
-                 <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={1.5} />
-               </Canvas>
-             </div>
+             <GlobeCanvas />
           </div>
 
         </div>

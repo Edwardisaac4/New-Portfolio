@@ -1,4 +1,5 @@
 import { useLayoutEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { techStackIcons } from "../constants";
@@ -43,20 +44,22 @@ const TechCard = ({ icon, index, bentoSize = "normal" }) => {
 
     // Determine grid span classes
     let spanClasses = "col-span-1 min-h-[220px]";
-    if (isLarge) spanClasses = "col-span-2 md:col-span-2 md:row-span-2 min-h-[300px] md:min-h-[464px]"; // 464 = 220*2 + 24 (gap)
+    if (isLarge) spanClasses = "col-span-2 md:col-span-2 md:row-span-2 min-h-[300px] md:min-h-[464px]";
     else if (isWide) spanClasses = "col-span-2 md:col-span-2 min-h-[220px]";
 
     // Determine internal layout
     const layoutClasses = isWide
-        ? "flex-col sm:flex-row p-8 gap-6 text-center sm:text-left"
-        : "flex-col p-8 text-center";
+        ? "flex-col sm:flex-row p-7 sm:p-8 gap-6 justify-between items-center sm:items-center text-center sm:text-left"
+        : isLarge
+            ? "flex-col p-8 md:p-10 justify-between items-center text-center"
+            : "flex-col p-6 sm:p-7 justify-between items-center text-center";
 
     // Determine icon size
     const iconSizeClass = isLarge
-        ? "w-24 h-24 md:w-32 md:h-32 mb-6"
+        ? "w-28 h-28 md:w-36 md:h-36 my-auto"
         : isWide
-        ? "w-16 h-16 md:w-20 md:h-20 mb-4 sm:mb-0 shrink-0"
-        : "w-16 h-16 md:w-20 md:h-20 mb-5";
+            ? "w-16 h-16 md:w-20 md:h-20 shrink-0"
+            : "w-16 h-16 md:w-20 md:h-20 my-auto";
 
     return (
         <div
@@ -64,31 +67,49 @@ const TechCard = ({ icon, index, bentoSize = "normal" }) => {
             data-tech-card
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
-            className={`group relative flex items-center justify-center rounded-3xl backdrop-blur-2xl border border-black-50 overflow-hidden cursor-pointer w-full h-full ${spanClasses} ${layoutClasses}`}
+            className={`group relative flex rounded-3xl backdrop-blur-2xl border border-white/10 hover:border-white/25 transition-colors duration-500 overflow-hidden cursor-pointer w-full h-full ${spanClasses} ${layoutClasses}`}
             style={{
                 transformStyle: "preserve-3d",
                 willChange: "transform",
-                background:
-                    "linear-gradient(135deg, rgba(40, 39, 50, 0.6) 0%, rgba(28, 28, 33, 0.3) 100%)",
-                boxShadow: `0 20px 50px -20px ${icon.color}30, 0 8px 32px rgba(0,0,0,0.4)`,
+                background: "linear-gradient(135deg, rgba(30, 30, 42, 0.7) 0%, rgba(16, 16, 24, 0.4) 100%)",
+                boxShadow: `0 20px 50px -20px ${icon.color}25, 0 8px 32px rgba(0,0,0,0.5)`,
             }}
         >
-            {/* Ambient glow on hover */}
+            {/* Micro grid pattern background */}
+            <div className="absolute inset-0 bg-[radial-gradient(#ffffff08_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none opacity-30 group-hover:opacity-70 transition-opacity duration-700" />
+
+            {/* Ambient color radial glow on hover */}
             <div
                 className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
                 style={{
-                    background: `radial-gradient(circle at ${isWide ? '30%' : '50%'} 50%, ${icon.color}25 0%, transparent 70%)`,
+                    background: `radial-gradient(circle at ${isWide ? '25%' : '50%'} 50%, ${icon.color}22 0%, transparent 75%)`,
                 }}
             />
 
-            {/* Floating icon with 3D depth */}
+            {/* Top Corner Badge & Accent Indicator */}
+            <div className="w-full flex items-center justify-between relative z-10 pointer-events-none" style={{ transform: "translateZ(15px)" }}>
+                {icon.tag && (
+                    <span className="text-[9px] sm:text-[10px] font-mono tracking-[0.2em] uppercase px-2.5 py-1 rounded-full border border-white/10 bg-white/5 text-white/50 group-hover:text-white/90 group-hover:border-white/20 transition-all duration-300">
+                        {icon.tag}
+                    </span>
+                )}
+                <div
+                    className="w-2 h-2 rounded-full transition-all duration-300 ml-auto group-hover:scale-125"
+                    style={{
+                        backgroundColor: icon.color,
+                        boxShadow: `0 0 10px ${icon.color}`,
+                    }}
+                />
+            </div>
+
+            {/* Floating 3D Icon */}
             <div
                 className={`relative z-10 ${iconSizeClass}`}
                 style={{
                     transform: "translateZ(40px)",
-                    animation: "techFloat 3s ease-in-out infinite",
-                    animationDelay: `${(index % 4) * 0.3}s`,
-                    filter: `drop-shadow(0 0 18px ${icon.color}90)`,
+                    animation: "techFloat 3.5s ease-in-out infinite",
+                    animationDelay: `${(index % 4) * 0.35}s`,
+                    filter: `drop-shadow(0 0 20px ${icon.color}80)`,
                 }}
             >
                 <img
@@ -100,25 +121,25 @@ const TechCard = ({ icon, index, bentoSize = "normal" }) => {
                 />
             </div>
 
-            {/* Name */}
-            <div className="relative z-10" style={{ transform: "translateZ(20px)" }}>
+            {/* Name & Description */}
+            <div className="relative z-10 w-full" style={{ transform: "translateZ(25px)" }}>
                 <p
-                    className={`text-white-50 font-semibold tracking-tight ${
-                        isLarge ? "text-2xl md:text-3xl" : "text-lg md:text-xl"
+                    className={`font-semibold tracking-tight text-white group-hover:text-blue-50 transition-colors duration-300 ${
+                        isLarge ? "text-2xl sm:text-3xl md:text-4xl" : isWide ? "text-xl sm:text-2xl" : "text-lg sm:text-xl"
                     }`}
                 >
                     {icon.name}
                 </p>
-                {isWide && (
-                    <p className="mt-2 text-sm text-white-500 max-w-[200px]">
-                        Core technology for building robust solutions.
+                {(isWide || isLarge) && icon.desc && (
+                    <p className="mt-1.5 text-xs sm:text-sm text-white-500 group-hover:text-white-50/80 transition-colors duration-300 leading-relaxed max-w-[280px] sm:max-w-none">
+                        {icon.desc}
                     </p>
                 )}
             </div>
 
-            {/* Reflection */}
+            {/* Bottom Accent Reflection */}
             <div
-                className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-16 h-8 opacity-30 blur-md pointer-events-none"
+                className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-20 h-8 opacity-25 group-hover:opacity-60 blur-md pointer-events-none transition-opacity duration-500"
                 style={{
                     background: `radial-gradient(ellipse, ${icon.color}, transparent 70%)`,
                 }}
@@ -287,21 +308,33 @@ const TechStack = () => {
                     ref={gridRef}
                     className="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6 auto-rows-auto"
                 >
-                    {techStackIcons.map((icon, i) => {
-                        // Assign Bento sizes dynamically
+                    {techStackIcons.slice(0, 4).map((icon, i) => {
+                        // Assign Bento sizes dynamically based on technology
                         let bentoSize = "normal";
-                        if (i === 0) bentoSize = "large"; // React (2x2)
-                        else if (i === 3) bentoSize = "wide"; // Tailwind CSS (2x1)
-                        
+                        if (icon.name === "React") bentoSize = "large"; // React (2x2)
+                        else if (icon.name === "Next.js") bentoSize = "wide"; // Next.js (2x1)
+                        else if (icon.name === "Tailwind CSS") bentoSize = "wide"; // Tailwind CSS (2x1)
+                        else if (icon.name === "Supabase") bentoSize = "wide"; // Supabase (2x1)
+
                         return <TechCard key={icon.name} icon={icon} index={i} bentoSize={bentoSize} />;
                     })}
+                </div>
+
+                {/* Explore Full Skillset CTA Button */}
+                <div className="mt-14 text-center relative z-20">
+                    <Link
+                        to="/skills"
+                        className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-blue-500 hover:bg-blue-600 text-white font-bold text-sm sm:text-base tracking-wide transition-all duration-300 shadow-[0_0_30px_rgba(59,130,246,0.35)] hover:shadow-[0_0_40px_rgba(59,130,246,0.6)] hover:scale-105"
+                    >
+                        Explore Full Skillset & Arsenal (14+) →
+                    </Link>
                 </div>
             </div>
 
             {/* Marquee ticker */}
             <div
                 className="relative z-10 mt-8 border-y border-black-50 py-6 backdrop-blur-sm"
-                style={{ 
+                style={{
                     background: "rgba(28, 28, 33, 0.2)",
                     WebkitMaskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
                     maskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
@@ -315,7 +348,7 @@ const TechStack = () => {
                             const isOutline = i % 2 !== 0;
                             return (
                                 <span key={i} className="flex items-center gap-16 group/marquee-item">
-                                    <span 
+                                    <span
                                         className={`transition-colors duration-300 ${isOutline ? "text-transparent" : "text-blue-50 group-hover/marquee-item:text-blue-400"}`}
                                         style={isOutline ? { WebkitTextStroke: "1.5px rgba(82, 174, 255, 0.8)" } : {}}
                                     >

@@ -1,5 +1,6 @@
 {
     "recommendations": [
-        "gydunhn.vsc-essentials-core"
+        "gydunhn.vsc-essentials-core",
+        "anthropic.claude-code"
     ]
 }

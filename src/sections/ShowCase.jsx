@@ -1,8 +1,10 @@
-import { useRef, useState, useCallback, useEffect } from 'react'
+import { useRef, useState, useCallback } from 'react'
+import { Link } from 'react-router-dom'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/all'
 import { projects } from '../constants'
+import LazyVideo from '../components/LazyVideo.jsx'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -38,33 +40,6 @@ const ImageWithFallback = ({ src, alt, className, title, ...props }) => {
     );
 };
 
-// Auto-play videos when they scroll into view
-const useVideoAutoPlay = (containerRef) => {
-    useEffect(() => {
-        if (!containerRef.current) return;
-        const videos = containerRef.current.querySelectorAll('video[preload="none"]');
-        if (!videos.length) return;
-
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        entry.target.play().catch(() => {});
-                    } else {
-                        entry.target.pause();
-                    }
-                });
-            },
-            { threshold: 0.25 }
-        );
-
-        videos.forEach((video) => observer.observe(video));
-        return () => observer.disconnect();
-    }, [containerRef]);
-};
-
-
-
 /**
  * The ShowCase (Work Space) section displaying selected projects.
  * Features a custom auto-play hook for videos and complex GSAP animations.
@@ -76,8 +51,7 @@ const ShowCase = () => {
     const [activeProject, setActiveProject] = useState(null)
     const isAnimating = useRef(false)
 
-    // Auto-play videos when they scroll into view (deferred loading)
-    useVideoAutoPlay(containerRef)
+    // Videos are lazy-loaded via the LazyVideo component — no hook needed
 
     useGSAP(() => {
         const mm = gsap.matchMedia()
@@ -257,11 +231,10 @@ const ShowCase = () => {
                 >
                     <div className="relative w-full h-[42%] shrink-0 overflow-hidden">
                         {activeProject.media.type === 'video' ? (
-                            <video 
-                                src={activeProject.media.src} 
+                            <LazyVideo
+                                src={activeProject.media.src}
                                 poster={activeProject.media.poster}
-                                autoPlay loop muted playsInline 
-                                className="w-full h-full object-cover" 
+                                className="w-full h-full object-cover"
                             />
                         ) : (
                             <ImageWithFallback 
@@ -337,7 +310,7 @@ const ShowCase = () => {
 
                     {/* Cards */}
                     <div className="skew-container showcase-list">
-                        {projects.map((project, index) => {
+                        {projects.slice(0, 2).map((project, index) => {
                             const isEven = index % 2 !== 0
                             return (
                                 <div key={project.id} data-project-id={project.id} className="project-item w-full">
@@ -415,11 +388,9 @@ const ShowCase = () => {
                                                         {/* Media container — videos get a lightweight path (no parallax / no hover scale) */}
                                                         {project.media.type === 'video' ? (
                                                             <div className="w-full h-full">
-                                                                <video
+                                                                <LazyVideo
                                                                     src={project.media.src}
                                                                     poster={project.media.poster}
-                                                                    loop playsInline muted
-                                                                    preload="none"
                                                                     className="w-full h-full object-cover"
                                                                 />
                                                             </div>
@@ -444,6 +415,16 @@ const ShowCase = () => {
                                 </div>
                             )
                         })}
+                    </div>
+
+                    {/* View All Projects CTA Button */}
+                    <div className="mt-16 text-center relative z-20">
+                        <Link
+                            to="/work"
+                            className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-blue-500 hover:bg-blue-600 text-white font-bold text-sm sm:text-base tracking-wide transition-all duration-300 shadow-[0_0_30px_rgba(59,130,246,0.35)] hover:shadow-[0_0_40px_rgba(59,130,246,0.6)] hover:scale-105"
+                        >
+                            View All Projects & Work (8) →
+                        </Link>
                     </div>
 
                 </div>

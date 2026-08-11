@@ -1,5 +1,6 @@
 import { navLinks } from "../constants";
 import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 /**
  * Main navigation bar component.
@@ -7,6 +8,7 @@ import { useState, useEffect } from "react";
  */
 const NavBar = () => {
     const [scrolled, setScrolled] = useState(false);
+    const location = useLocation();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -21,32 +23,34 @@ const NavBar = () => {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-
     return (
         <header className={`navbar ${scrolled ? 'scrolled' : 'not-scrolled'}`}>
             <div className="nav-container relative z-50">
-                <a href="#hero" className="logo">
+                <Link to="/" className="logo">
                     Isaac Edward
-                </a>
+                </Link>
 
                 <nav className="desktop">
                     <ul>
-                        {navLinks.map(({link, name}) => (
-                            <li key={name} className="group">
-                                <a href={link}>
-                                    <span>{name}</span>
-                                    <span className="underline" />
-                                </a>
-                            </li>
-                        ))}
+                        {navLinks.map(({link, name}) => {
+                            const isActive = location.pathname === link;
+                            return (
+                                <li key={name} className="group">
+                                    <Link to={link} className={isActive ? 'text-blue-400 font-semibold' : ''}>
+                                        <span>{name}</span>
+                                        <span className={`underline ${isActive ? 'w-full bg-blue-400' : ''}`} />
+                                    </Link>
+                                </li>
+                            );
+                        })}
                     </ul>
                 </nav>
                 
-                <a href="#contact" className="contact-btn group flex">
+                <Link to="/contact" className="contact-btn group flex">
                     <div className="contact-inner">
-                        <span>Contact Me</span>
+                        <span>Let's Talk</span>
                     </div>
-                </a>
+                </Link>
             </div>
         </header>
     )

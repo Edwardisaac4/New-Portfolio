@@ -26,3 +26,9 @@ dist-ssr
 
 .vercel
 .env*.local
+
+# Video tooling / intermediate encodes
+# ffmpeg comes from the `ffmpeg-static` devDependency — no local binary needed.
+ffmpeg.zip
+ffmpeg/
+*.compressed.mp4
