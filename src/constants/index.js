@@ -27,11 +27,11 @@ const words = [
   { text: "Ideas",       imgPath: "/images/ideas.svg" },
   { text: "Solutions",   imgPath: "/images/concepts.svg" },
   { text: "Products",    imgPath: "/images/designs.svg" },
-  { text: "Interfaces",  imgPath: "/images/code.svg" },
+  { text: "Interfaces",  imgPath: "/images/code.webp" },
   { text: "Experiences", imgPath: "/images/ideas.svg" },
   { text: "Systems",     imgPath: "/images/concepts.svg" },
   { text: "Animations",  imgPath: "/images/designs.svg" },
-  { text: "Innovation",  imgPath: "/images/code.svg" },
+  { text: "Innovation",  imgPath: "/images/code.webp" },
 ];
 
 /**
@@ -63,12 +63,12 @@ const abilities = [
     desc: "Delivering fully optimized, lightning-fast applications focused on seamless user experiences.",
   },
   {
-    imgPath: "/images/puzzle_icon.png",
+    imgPath: "/images/puzzle_icon.webp",
     title: "Adaptive Problem Solving",
     desc: "Quickly mastering new technologies and navigating complex logic to deliver innovative solutions out of the box.",
   },
   {
-    imgPath: "/images/user_interface_icon.png",
+    imgPath: "/images/user_interface_icon.webp",
     title: "User-Centric Engineering",
     desc: "Prioritizing accessibility, intuitiveness, and seamless end-to-end journeys in every feature built.",
   },
@@ -82,7 +82,7 @@ const techStackIcons = [
     name: "React",
     tag: "UI Library",
     desc: "Primary framework for building dynamic, component-driven web applications.",
-    iconPath: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+    iconPath: "/images/icons/react-original.svg",
     color: "#61DAFB",
   },
   {
@@ -92,7 +92,7 @@ const techStackIcons = [
     // simple-icons (single monochrome path) rather than devicon: devicon's nextjs-original.svg
     // is a black circle with a white "N", so the `isWhite` invert filter flattens it to a solid
     // white disc and the glyph vanishes. Matches how Three.js / Shadcn UI are handled below.
-    iconPath: "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/nextdotjs.svg",
+    iconPath: "/images/icons/nextdotjs.svg",
     color: "#FFFFFF",
     isWhite: true,
   },
@@ -100,49 +100,49 @@ const techStackIcons = [
     name: "TypeScript",
     tag: "Static Typing",
     desc: "Type safety, clean contracts & self-documenting code bases.",
-    iconPath: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
+    iconPath: "/images/icons/typescript-original.svg",
     color: "#3178C6",
   },
   {
     name: "JavaScript",
     tag: "Core Language",
     desc: "Modern ES6+ syntax, asynchronous programming & DOM architecture.",
-    iconPath: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+    iconPath: "/images/icons/javascript-original.svg",
     color: "#F7DF1E",
   },
   {
     name: "Tailwind CSS",
     tag: "Utility-First CSS",
     desc: "Rapid styling, design token systems & responsive design patterns.",
-    iconPath: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg",
+    iconPath: "/images/icons/tailwindcss-original.svg",
     color: "#06B6D4",
   },
   {
     name: "Supabase",
     tag: "Backend & DB",
     desc: "PostgreSQL, instant Auth, Realtime listeners & Storage bucket management.",
-    iconPath: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/supabase/supabase-original.svg",
+    iconPath: "/images/icons/supabase-original.svg",
     color: "#3ECF8E",
   },
   {
     name: "HTML5",
     tag: "Structure & SEO",
     desc: "Semantic elements, accessibility standards & metadata optimization.",
-    iconPath: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
+    iconPath: "/images/icons/html5-original.svg",
     color: "#E34F26",
   },
   {
     name: "CSS",
     tag: "Styling & Motion",
     desc: "Flexbox, Grid, keyframe animations & modern layout math.",
-    iconPath: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
+    iconPath: "/images/icons/css3-original.svg",
     color: "#1572B6",
   },
   {
     name: "Shadcn UI",
     tag: "Component System",
     desc: "Accessible, unstyled Radix primitives styled with Tailwind.",
-    iconPath: "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/shadcnui.svg",
+    iconPath: "/images/icons/shadcnui.svg",
     color: "#FFFFFF",
     isWhite: true,
   },
@@ -150,14 +150,14 @@ const techStackIcons = [
     name: "GSAP",
     tag: "Animation Engine",
     desc: "ScrollTrigger, timeline orchestrations & high-FPS micro-animations.",
-    iconPath: "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/greensock.svg",
+    iconPath: "/images/icons/greensock.svg",
     color: "#88CE02",
   },
   {
     name: "Three.js",
     tag: "3D Web Graphics",
     desc: "WebGL rendering, 3D mesh scenes & interactive experiences.",
-    iconPath: "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/threedotjs.svg",
+    iconPath: "/images/icons/threedotjs.svg",
     color: "#FFFFFF",
     isWhite: true,
   },
@@ -165,21 +165,21 @@ const techStackIcons = [
     name: "Framer Motion",
     tag: "React Motion",
     desc: "Fluid UI transitions, gestures & interactive layout shifts.",
-    iconPath: "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/framer.svg",
+    iconPath: "/images/icons/framer.svg",
     color: "#F107A3",
   },
   {
     name: "WordPress",
     tag: "CMS Platform",
     desc: "Custom themes, headless CMS setups & content workflows.",
-    iconPath: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-plain.svg",
+    iconPath: "/images/icons/wordpress-plain.svg",
     color: "#21759B",
   },
   {
     name: "Vite",
     tag: "Build Tooling",
     desc: "Lightning-fast HMR, optimized chunking & modern bundling.",
-    iconPath: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vitejs/vitejs-original.svg",
+    iconPath: "/images/icons/vitejs-original.svg",
     color: "#646CFF",
   },
 ];
@@ -190,8 +190,8 @@ const techStackIcons = [
 const expCards = [
   {
     review: "Edward consistently delivers high-quality features and brings a proactive approach to frontend development.",
-    imgPath: "/images/logos/ean Aviation.png",
-    logoPath: "/images/logos/ean Aviation.png",
+    imgPath: "/images/logos/ean-aviation.webp",
+    logoPath: "/images/logos/ean-aviation.webp",
     title: "Frontend Developer",
     date: "Present",
     responsibilities: [
@@ -207,8 +207,8 @@ const expCards = [
   },
   {
     review: "During his 7 months at Greenware Tech, Edward was an eager learner and a valuable addition to the development team.",
-    imgPath: "/images/logos/GreenWare.png",
-    logoPath: "/images/logos/GreenWare.png",
+    imgPath: "/images/logos/greenware.webp",
+    logoPath: "/images/logos/greenware.webp",
     title: "Junior Web Developer",
     date: "7 Months",
     responsibilities: [
@@ -227,32 +227,52 @@ const expCards = [
 const socialImgs = [
   {
     name: "Instagram",
-    imgPath: "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg",
+    imgPath: "/images/icons/instagram.svg",
     url: "https://www.instagram.com/isaacdrumz4",
   },
   {
     name: "WhatsApp",
-    imgPath: "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg",
+    imgPath: "/images/icons/whatsapp.svg",
     url: "https://wa.me/2347087374423",
   },
   {
     name: "X",
-    imgPath: "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/x.svg",
+    imgPath: "/images/icons/x.svg",
     url: "https://x.com/isaacdrumz4",
   },
   {
     name: "LinkedIn",
-    imgPath: "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg",
+    imgPath: "/images/icons/linkedin.svg",
     url: "https://www.linkedin.com/in/edward-isaac-5b7544310/",
   },
 ];
 
 /**
- * Projects displayed in the ShowCase (Work Space) section.
+ * Projects displayed in the ShowCase (Work Space) section (the first two are
+ * featured on the home page) and on the Work page.
+ * `link` can be a GitHub repo or a live site; the button label adapts to it.
+ * Image media can add a `srcSet` of smaller copies so phones and 1x screens
+ * don't download the full-size screenshot.
  */
 const projects = [
   {
     id: 0,
+    title: 'EAN Aviation',
+    desc: "The live website for EAN Aviation, Nigeria's first fully integrated FBO at Murtala Muhammed International Airport, Lagos. It showcases private jet and helicopter charter, aircraft maintenance, the VIP terminal and 24/7 ground handling, with service, pricing and insights pages and a charter inquiry flow.",
+    tech: ['Next.js', 'React', 'Tailwind CSS', 'Vercel', 'TypeScript', 'Supabase'],
+    media: { type: 'image', src: '/images/ean-aero.webp', srcSet: '/images/ean-aero-800.webp 800w, /images/ean-aero.webp 1440w' },
+    link: 'https://ean.aero'
+  },
+  {
+    id: 1,
+    title: 'NBAC Conference',
+    desc: "The official website for the Nigerian Business Aviation Conference, West Africa's premier business aviation event. It covers the conference programme, market landscape, steering committee and sponsors, with a photo gallery and delegate registration.",
+    tech: ['Next.js', 'React', 'Tailwind CSS', 'Vercel', 'TypeScript', 'Supabase'],
+    media: { type: 'image', src: '/images/nbac.webp', srcSet: '/images/nbac-800.webp 800w, /images/nbac.webp 1440w' },
+    link: 'https://www.nbac.com.ng'
+  },
+  {
+    id: 2,
     title: 'Movie Landing Page',
     desc: 'A responsive website that allows users to browse and search for movies and anime. It features a modern UI with a dark theme and smooth animations. The website is built with Vanilla JS, HTML, CSS and uses the IMDB API to fetch movie and anime data.',
     tech: ['HTML', 'CSS', 'Vanilla JS', 'IMDB API'],
@@ -260,15 +280,15 @@ const projects = [
     link: 'https://github.com/Edwardisaac4/movie-Landing-Page'
   },
   {
-    id: 1,
+    id: 3,
     title: 'Ean Jets Booking',
     desc: 'A high-end private jet charter booking experience focusing on premium design, fast response times, and ease of use.',
     tech: ['React', 'Tailwind CSS', 'Typescript'],
-    media: { type: 'image', src: '/images/ean-jets.png' },
-    link: 'https://github.com/Edwardisaac4/EanJets'
+    media: { type: 'image', src: '/images/ean-jets.webp' },
+    link: 'https://eanjets.aero'
   },
   {
-    id: 2,
+    id: 4,
     title: 'Luxe Estates',
     desc: 'A modern, high-end real estate application featuring seamless property browsing, interactive layouts, smooth animations with Framer Motion, and a polished user interface built for high-end clients.',
     tech: ['React', 'Vite', 'Tailwind CSS', 'Framer Motion', 'Radix UI', 'Typescript'],
@@ -276,7 +296,7 @@ const projects = [
     link: 'https://github.com/Edwardisaac4/Luxe-Estates'
   },
   {
-    id: 3,
+    id: 5,
     title: 'EAN Aviation Temp',
     desc: 'A professional aviation dashboard template built for private jet services, charter flights, and fleet management, focusing on clean information architecture and high performance.',
     tech: ['React', 'Vite', 'Tailwind CSS', 'Radix UI'],
@@ -284,7 +304,7 @@ const projects = [
     link: 'https://github.com/Edwardisaac4/EAN-Aviation-Temp'
   },
   {
-    id: 4,
+    id: 6,
     title: 'Resume Analyser',
     desc: 'An AI-powered resume analyzer that allows users to upload PDF resumes, parse the content, and evaluate candidates qualifications against job descriptions using modern frontend parsing and state management.',
     tech: ['React Router v7', 'Vite', 'Tailwind CSS', 'PDF.js', 'Zustand'],
@@ -292,7 +312,7 @@ const projects = [
     link: 'https://github.com/Edwardisaac4/Resume-Analyzer'
   },
   {
-    id: 5,
+    id: 7,
     title: 'New Portfolio',
     desc: 'A premium, highly interactive developer portfolio utilizing Three.js 3D elements, GSAP scroll-triggered animations, and a modern glassmorphism aesthetic to deliver a stunning visual experience.',
     tech: ['React', 'Vite', 'Three.js', 'React Three Fiber', 'GSAP', 'Tailwind CSS'],
@@ -300,7 +320,7 @@ const projects = [
     link: 'https://github.com/Edwardisaac4/New-Portfolio'
   },
   {
-    id: 6,
+    id: 8,
     title: 'New Gaming',
     desc: 'A visually stunning gaming landing page clone of Zentry featuring complex immersive scroll animations, dynamic video components, custom hover effects, and a highly interactive design.',
     tech: ['React', 'Vite', 'GSAP', 'Tailwind CSS', 'Framer Motion'],
@@ -308,7 +328,7 @@ const projects = [
     link: 'https://github.com/Edwardisaac4/new-gaming'
   },
   {
-    id: 7,
+    id: 9,
     title: 'Zentry Clone',
     desc: 'A High End Landing Page with Smooth Animations and Responsive Design.',
     tech: ['HTML', 'CSS', 'JavaScript'],

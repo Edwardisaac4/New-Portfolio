@@ -1,67 +1,32 @@
-import { useRef, useLayoutEffect, Suspense, useState, useEffect } from "react";
+import { useRef, useLayoutEffect, Suspense, lazy } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import TitleHeader from "../components/TitleHeader";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, Sphere, Float, useTexture } from "@react-three/drei";
+import useInView from "../hooks/useInView";
+import CanvasErrorBoundary from "../components/CanvasErrorBoundary";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const EarthGlobe = () => {
-  const sphereRef = useRef();
-  const colorMap = useTexture('/images/earth-night.jpg');
-
-  useFrame(({ clock }) => {
-    if (sphereRef.current) {
-      sphereRef.current.rotation.y = clock.getElapsedTime() * 0.2;
-      sphereRef.current.rotation.z = 0.2; // Slight tilt
-    }
-  });
-
-  return (
-    <Float speed={1.5} rotationIntensity={0.5} floatIntensity={0.5}>
-      <Sphere ref={sphereRef} args={[1, 32, 32]} scale={1.8}>
-        <meshStandardMaterial 
-          map={colorMap} 
-          roughness={0.6} 
-          metalness={0.1}
-        />
-      </Sphere>
-    </Float>
-  );
-};
+const EarthGlobeCanvas = lazy(() => import("../components/Globes/EarthGlobeCanvas.jsx"));
 
 /**
- * GlobeCanvas — wraps the 3D Canvas with an IntersectionObserver so the
- * Three.js render loop pauses when the card scrolls out of view.
- * Saves GPU/CPU during GTmetrix analysis and when users are elsewhere on the page.
+ * GlobeCanvas — only creates the WebGL canvas once the card is within 200px of
+ * the viewport, then pauses its render loop whenever it scrolls back out.
+ * Nothing 3D is downloaded, compiled or rendered while the page first loads.
  */
 const GlobeCanvas = () => {
   const wrapperRef = useRef(null);
-  const [inView, setInView] = useState(false);
-
-  useEffect(() => {
-    const el = wrapperRef.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => setInView(entry.isIntersecting),
-      { rootMargin: '100px', threshold: 0 }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
+  const { inView, hasEntered } = useInView(wrapperRef, { rootMargin: "200px" });
 
   return (
     <div ref={wrapperRef} className="w-full h-full absolute inset-0">
-      <Canvas camera={{ position: [0, 0, 5], fov: 45 }} frameloop={inView ? 'always' : 'never'}>
-        <ambientLight intensity={3} />
-        <directionalLight position={[10, 10, 5]} intensity={4} />
-        <directionalLight position={[-10, -10, -5]} intensity={2} />
-        <Suspense fallback={null}>
-          <EarthGlobe />
-        </Suspense>
-        <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={1.5} />
-      </Canvas>
+      {hasEntered && (
+        <CanvasErrorBoundary>
+          <Suspense fallback={null}>
+            <EarthGlobeCanvas active={inView} />
+          </Suspense>
+        </CanvasErrorBoundary>
+      )}
     </div>
   );
 };
@@ -118,8 +83,11 @@ const About = () => {
             {/* Inner Glow on Hover */}
             <div className="absolute inset-0 bg-blue-500/0 group-hover:bg-blue-500/5 transition-colors duration-500 z-0" />
             <img 
-               src="/images/eddie_pic-removebg-preview.png" 
-               alt="Isaac Edward" 
+               src="/images/eddie-portrait.webp"
+               alt="Isaac Edward"
+               width={408}
+               height={612}
+               decoding="async"
                className="w-[130%] h-auto object-contain object-bottom relative z-10 drop-shadow-2xl transition-transform duration-500 group-hover:scale-105 -mb-6 md:-mb-10" 
                loading="lazy"
             />
@@ -134,7 +102,7 @@ const About = () => {
               Digital <span className="text-blue-400">Craft</span>.
             </h3>
             <p className="text-white-500 text-base md:text-lg leading-relaxed max-w-xl mx-auto">
-              Hi, I'm Isaac Edward, a Frontend Engineer. I specialize in bridging the gap between exceptional design and flawless technical execution. By combining clean architecture with high-end animations, I craft intuitive interfaces that don't just work—they wow.
+              Hi, I'm Isaac Edward, a Full Stack Engineer. I specialize in bridging the gap between exceptional design and flawless technical execution. By combining clean architecture with high-end animations, I craft intuitive interfaces that don't just work—they wow.
             </p>
           </div>
 

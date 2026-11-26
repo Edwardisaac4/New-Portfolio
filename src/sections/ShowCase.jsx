@@ -2,7 +2,7 @@ import { useRef, useState, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/all'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { projects } from '../constants'
 import LazyVideo from '../components/LazyVideo.jsx'
 
@@ -255,7 +255,7 @@ const ShowCase = () => {
 
                     <div className="expanded-content flex flex-col gap-3 sm:gap-5 p-5 sm:p-8 md:p-12 overflow-y-auto">
                         <p className="text-[10px] sm:text-xs font-mono text-blue-400 font-semibold tracking-[0.2em] uppercase">
-                            0{activeProject.id + 1} // Project
+                            {String(activeProject.id + 1).padStart(2, '0')} // Project
                         </p>
                         <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold leading-tight text-white">
                             {activeProject.title}
@@ -273,7 +273,7 @@ const ShowCase = () => {
                         <div className="flex flex-wrap gap-3 mt-3">
                             <a href={activeProject.link} target="_blank" rel="noopener noreferrer"
                                 className="flex items-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 rounded-full bg-blue-500 hover:bg-blue-600 text-white text-xs sm:text-sm font-semibold transition-colors duration-200">
-                                View on GitHub →
+                                {activeProject.link.includes('github.com') ? 'View on GitHub →' : 'Visit Live Site →'}
                             </a>
                             <button onClick={closeProject}
                                 className="flex items-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 rounded-full border border-white/20 hover:border-white/40 text-white/60 hover:text-white text-xs sm:text-sm font-semibold transition-colors duration-200 cursor-pointer">
@@ -398,6 +398,8 @@ const ShowCase = () => {
                                                             <div className="parallax-media absolute top-[-15%] left-0 w-full h-[130%]" style={{ willChange: 'transform' }}>
                                                                 <ImageWithFallback
                                                                     src={project.media.src}
+                                                                    srcSet={project.media.srcSet}
+                                                                    sizes="(min-width: 1280px) 660px, (min-width: 1024px) 55vw, 100vw"
                                                                     alt={project.title}
                                                                     title={project.title}
                                                                     loading="lazy"
@@ -423,7 +425,7 @@ const ShowCase = () => {
                             to="/work"
                             className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-blue-500 hover:bg-blue-600 text-white font-bold text-sm sm:text-base tracking-wide transition-all duration-300 shadow-[0_0_30px_rgba(59,130,246,0.35)] hover:shadow-[0_0_40px_rgba(59,130,246,0.6)] hover:scale-105"
                         >
-                            View All Projects & Work (8) →
+                            View All Projects & Work ({projects.length}) →
                         </Link>
                     </div>
 

@@ -1,41 +1,18 @@
-import { useRef, useLayoutEffect } from "react";
+import { useRef, useLayoutEffect, Suspense, lazy } from "react";
 import { Link } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, Sphere, MeshDistortMaterial, Float } from "@react-three/drei";
 import TitleHeader from "../components/TitleHeader";
 import ContactForm from "../components/ContactForm";
 import { socialImgs } from "../constants";
+import useInView from "../hooks/useInView";
+import CanvasErrorBoundary from "../components/CanvasErrorBoundary";
 
 gsap.registerPlugin(ScrollTrigger);
 
 // ── 3D Background Element ──
-const AbstractGlobe = () => {
-  const sphereRef = useRef();
-
-  useFrame(({ clock }) => {
-    if (sphereRef.current) {
-      sphereRef.current.rotation.y = clock.getElapsedTime() * 0.2;
-    }
-  });
-
-  return (
-    <Float speed={2} rotationIntensity={1} floatIntensity={2}>
-      <Sphere ref={sphereRef} args={[1, 32, 32]} scale={2.2}>
-        <MeshDistortMaterial
-          color="#52aeff"
-          attach="material"
-          distort={0.4}
-          speed={2}
-          roughness={0.2}
-          metalness={0.8}
-          wireframe
-        />
-      </Sphere>
-    </Float>
-  );
-};
+// Loaded on demand: Three.js is only fetched once the section nears the viewport.
+const WireframeGlobeCanvas = lazy(() => import("../components/Globes/WireframeGlobeCanvas.jsx"));
 
 /**
  * The homepage Contact section.
@@ -46,6 +23,8 @@ const Contact = () => {
   const sectionRef = useRef(null);
   const formRef = useRef(null);
   const globeContainerRef = useRef(null);
+  // Create the globe's WebGL canvas only when it gets close, and pause it when scrolled away
+  const { inView: globeInView, hasEntered: globeHasEntered } = useInView(globeContainerRef, { rootMargin: "200px" });
 
   // GSAP Animations
   useLayoutEffect(() => {
@@ -123,12 +102,13 @@ const Contact = () => {
           <div ref={globeContainerRef} className="relative h-[400px] w-full md:h-[500px]">
             {/* Ambient background glow behind globe */}
             <div className="absolute inset-0 left-1/2 top-1/2 h-[300px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-500/20 blur-[100px]" />
-            <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
-              <ambientLight intensity={0.5} />
-              <directionalLight position={[10, 10, 5]} intensity={1.5} />
-              <AbstractGlobe />
-              <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={0.5} />
-            </Canvas>
+            {globeHasEntered && (
+              <CanvasErrorBoundary>
+                <Suspense fallback={null}>
+                  <WireframeGlobeCanvas active={globeInView} />
+                </Suspense>
+              </CanvasErrorBoundary>
+            )}
           </div>
 
           {/* Social Links */}
@@ -143,7 +123,7 @@ const Contact = () => {
                 aria-label={social.name}
                 className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-black-200/50 backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:scale-110 hover:border-blue-400 hover:bg-blue-500/10 hover:shadow-[0_0_20px_rgba(82,174,255,0.4)]"
               >
-                <img src={social.imgPath} alt="" className="h-5 w-5 object-contain" style={{ filter: "invert(1) brightness(2)" }} />
+                <img src={social.imgPath} alt="" width={20} height={20} loading="lazy" className="h-5 w-5 object-contain" style={{ filter: "invert(1) brightness(2)" }} />
               </a>
             ))}
           </div>

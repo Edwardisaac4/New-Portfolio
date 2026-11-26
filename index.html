@@ -10,16 +10,13 @@
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
 
-    <!-- Preconnect + DNS prefetch to CDNs for faster font/icon loading -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
-    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
+    <!-- The hero background is the LCP element, but React only renders it after the JS
+         runs. Preloading it lets the browser fetch it in parallel with the bundle. -->
+    <link rel="preload" as="image" href="/images/bg.webp" type="image/webp" fetchpriority="high" />
 
-    <link rel="icon" type="image/png" href="/images/logos/Site%20Identity%20Logo.png" />
-    <title>Isaac Edward | Frontend Developer</title>
+    <!-- 64px copy of "Site Identity Logo.png" (the original is 8 MB) -->
+    <link rel="icon" type="image/png" href="/images/favicon.png" />
+    <title>Isaac Edward | Full Stack Engineer</title>
   </head>
   <body>
     <div id="root"></div>

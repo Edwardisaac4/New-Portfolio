@@ -1,4 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wght@0,200..900;1,200..900&display=swap");
+/* Mona Sans is self-hosted (bundled and cache-busted by Vite) instead of loaded from
+   Google Fonts, which needed a render-blocking CSS request to a third-party origin. */
+@import "@fontsource-variable/mona-sans/wght.css";
+@import "@fontsource-variable/mona-sans/wght-italic.css";
 @import "tailwindcss";
 
 :root {
@@ -12,7 +15,7 @@ body {
   background-color: black;
   color: white;
   scroll-behavior: smooth;
-  font-family: "Mona Sans", sans-serif;
+  font-family: "Mona Sans Variable", sans-serif;
   padding: 0;
   margin: 0;
 }
@@ -22,7 +25,7 @@ section {
 }
 
 @theme {
-  --font-sans: "Mona Sans", sans-serif;
+  --font-sans: "Mona Sans Variable", sans-serif;
   --color-white-50: #d9ecff;
   --color-black-50: #1c1c21;
   --color-black-100: #0e0e10;
@@ -30,6 +33,10 @@ section {
   --color-blue-50: #839cb5;
   --color-blue-100: #2d2d38;
 }
+
+/* Side-by-side hero layout: wide screens in landscape. Portrait tablets, even
+   1024px-wide ones like the 12.9" iPad Pro, keep the stacked layout. */
+@custom-variant desktop (@media (width >= 64rem) and (orientation: landscape));
 
 @layer utilities {
   .flex-center {
@@ -83,16 +90,19 @@ section {
   }
 
   .hero-layout {
-    @apply relative z-10 xl:mt-20 mt-24 md:min-h-dvh min-h-[80vh] flex xl:items-center items-start justify-center;
+    @apply relative z-10 desktop:mt-20 mt-24 md:min-h-dvh min-h-[80vh] flex desktop:items-center items-start justify-center desktop:justify-start;
   }
 
+  /* On desktop the headline sits in the left half of the hero, so it scales
+     down from 60px on narrower screens to fit. The slider's sizes are in em there
+     (equal to the md px values at 60px) so the word window scales with the text. */
   .hero-text {
-    @apply flex flex-col justify-center md:text-[60px] text-[30px] font-semibold relative z-10 pointer-events-none;
+    @apply flex flex-col justify-center md:text-[60px] desktop:text-[length:clamp(36px,4.4vw_-_8px,60px)] text-[30px] font-semibold relative z-10 pointer-events-none;
     img {
       @apply size-8 md:size-10 object-contain;
     }
     .slide {
-      @apply absolute pt-0 px-2 md:px-5 py-[30px] h-[48px] md:h-[78px] md:translate-y-1 translate-y-0 overflow-hidden;
+      @apply absolute pt-0 px-2 md:px-5 desktop:px-[0.333em] py-[30px] desktop:pb-[0.5em] h-[48px] md:h-[78px] desktop:h-[1.3em] md:translate-y-1 desktop:translate-y-[0.067em] translate-y-0 overflow-hidden;
     }
   }
 
@@ -100,8 +110,11 @@ section {
     @apply bg-black-200 py-2 px-4 rounded-full w-fit text-sm md:text-base text-nowrap;
   }
 
+  /* On desktop the canvas takes the right half of the hero, next to the text.
+     The mask fades the canvas's leading edge (top when stacked, left on desktop)
+     so the particle bloom doesn't end in a hard line. */
   .hero-3d-layout {
-    @apply xl:w-[70%] w-full h-full min-h-[50vh] absolute xl:-top-20 top-24 xl:-right-20 right-0;
+    @apply w-full h-full min-h-[50vh] absolute top-24 right-0 [mask-image:linear-gradient(to_bottom,transparent,black_8%)] desktop:-top-20 desktop:w-auto desktop:left-1/2 desktop:[mask-image:linear-gradient(to_right,transparent,black_8%)];
   }
 
   .navbar {
