@@ -83,13 +83,17 @@ const WorkPage = () => {
                                 ) : (
                                     <img
                                         src={project.media.src}
+                                        srcSet={project.media.srcSet}
+                                        sizes="(min-width: 768px) 50vw, 100vw"
                                         alt={project.title}
+                                        loading={idx < 2 ? "eager" : "lazy"} // the first row is above the fold
+                                        decoding="async"
                                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                                     />
                                 )}
                                 <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-80" />
                                 <span className="absolute top-4 left-4 text-[10px] font-mono tracking-widest text-blue-400 uppercase bg-black/60 backdrop-blur-md border border-white/10 px-3 py-1 rounded-full">
-                                    Project / 0{idx + 1}
+                                    Project / {String(idx + 1).padStart(2, "0")}
                                 </span>
                             </div>
 
@@ -123,7 +127,7 @@ const WorkPage = () => {
                                             rel="noopener noreferrer"
                                             className="text-xs font-semibold text-blue-400 hover:text-blue-300 flex items-center gap-1.5 transition-colors"
                                         >
-                                            GitHub Repository →
+                                            {project.link.includes("github.com") ? "GitHub Repository →" : "Visit Live Site →"}
                                         </a>
                                     </div>
                                 </div>

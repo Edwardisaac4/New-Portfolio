@@ -14,7 +14,7 @@ const Glowcard = ({ card, children }) => {
             <div className='glow' />
             <div className="flex items-center gap-1 mb-5 relative z-10">
                 {Array.from({ length: 5 }).map((_, i) => (
-                    <img src="/images/star.png" alt="star" key={i} className='w-5 h-5'/>
+                    <img src="/images/star.png" alt="" key={i} width={20} height={20} loading="lazy" className='w-5 h-5'/>
                 ))}
             </div>
 

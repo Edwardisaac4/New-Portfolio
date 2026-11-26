@@ -217,6 +217,8 @@ const TechStack = () => {
                 // Hold at end so unpin is smooth — gives user time to read before scroll resumes
                 .to({}, { duration: 0.6 });
 
+            const cleanups = [];
+
             // Marquee infinite scroll
             const marqueeTrack = sectionRef.current?.querySelector(".tech-marquee-track");
             if (marqueeTrack) {
@@ -234,6 +236,15 @@ const TechStack = () => {
                 marqueeTrack.parentElement.addEventListener("mouseleave", () => {
                     gsap.to(marqueeAnim, { timeScale: 1, duration: 0.5 });
                 });
+
+                // Only run the ticker while it's on screen, so it doesn't cost a
+                // main-thread update every frame while the visitor is elsewhere
+                const observer = new IntersectionObserver(([entry]) => {
+                    if (entry.isIntersecting) marqueeAnim.resume();
+                    else marqueeAnim.pause();
+                });
+                observer.observe(marqueeTrack.parentElement);
+                cleanups.push(() => observer.disconnect());
             }
 
             // Spotlight follows cursor
@@ -252,10 +263,12 @@ const TechStack = () => {
                     xTo(e.clientX - rect.left);
                     yTo(e.clientY - rect.top);
                 };
-                sectionRef.current?.addEventListener("mousemove", onMove);
-                return () =>
-                    sectionRef.current?.removeEventListener("mousemove", onMove);
+                const section = sectionRef.current;
+                section?.addEventListener("mousemove", onMove);
+                cleanups.push(() => section?.removeEventListener("mousemove", onMove));
             }
+
+            return () => cleanups.forEach((cleanup) => cleanup());
         }, sectionRef);
 
         return () => ctx.revert();

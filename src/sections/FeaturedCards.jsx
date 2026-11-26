@@ -34,13 +34,27 @@ const FeatureCard = ({ imgPath, title, desc, index }) => {
     const backGradient = backGradients[index % backGradients.length];
 
     useEffect(() => {
-        gsap.to([gradientFrontRef.current, gradientBackRef.current], {
+        const tween = gsap.to([gradientFrontRef.current, gradientBackRef.current], {
             backgroundPosition: "200% 50%",
             duration: 6,
             ease: "sine.inOut",
             repeat: -1,
-            yoyo: true
+            yoyo: true,
+            paused: true
         });
+
+        // background-position can't run on the compositor (it repaints every frame),
+        // so only animate it while the card is actually on screen
+        const observer = new IntersectionObserver(([entry]) => {
+            if (entry.isIntersecting) tween.resume()
+            else tween.pause()
+        })
+        observer.observe(flipperRef.current)
+
+        return () => {
+            observer.disconnect()
+            tween.kill()
+        }
     }, [])
 
     useEffect(() => {

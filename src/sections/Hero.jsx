@@ -1,15 +1,24 @@
+import { lazy, Suspense } from "react"
 import Button from "../components/Button.jsx"
 import { words } from "../constants/index.js"
-import HeroExperience from "../components/HeroModels/HeroExperience.jsx"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import AnimatedCounter from "../components/AnimatedCounter.jsx"
+import useIdleAfterLoad from "../hooks/useIdleAfterLoad.js"
+import CanvasErrorBoundary from "../components/CanvasErrorBoundary.jsx"
+
+// Three.js, React Three Fiber and the post-processing stack are ~1 MB of JS.
+// Keeping them out of the entry bundle lets the headline paint without waiting on them.
+const HeroExperience = lazy(() => import("../components/HeroModels/HeroExperience.jsx"))
 
 /**
  * The Hero section of the portfolio.
  * Displays a 3D animated room model, a marquee of words, and introductory text.
  */
 const Hero = () => {
+    // Boot the 3D scene once the page has loaded and the main thread is free
+    const show3D = useIdleAfterLoad()
+
     useGSAP(() => {
         // Master timeline — all clips start invisible
         const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
@@ -61,12 +70,13 @@ const Hero = () => {
     return (
         <section id="hero" className="relative overflow-hidden">
             <div className="hero-bg absolute top-0 z-10 left-0">
-                <img src="/images/bg.png" alt="background" />
+                {/* Decorative, and usually the LCP element: preloaded in index.html */}
+                <img src="/images/bg.webp" alt="" width={418} height={327} fetchPriority="high" />
             </div>
 
             <div className="hero-layout">
                 {/*LEFT CONTENT OF THE HERO SECTION*/}
-                <header className="flex flex-col md:w-full justify-center w-screen md:px-18 px-4">
+                <header className="flex flex-col md:w-full desktop:w-1/2 justify-center w-screen md:px-18 desktop:pr-6 px-4">
                     <div className="flex flex-col gap-5">
                         <div className="hero-text">
                             <h1>Shaping
@@ -77,7 +87,7 @@ const Hero = () => {
                                                 <img
                                                     src={word.imgPath}
                                                     alt={word.text}
-                                                    className="xl:size-10 md:size-8 size-6 md:p-1.5 p-1 rounded-full bg-white-50"
+                                                    className="desktop:size-[0.667em] md:size-8 size-6 md:p-1.5 p-1 rounded-full bg-white-50"
                                                 />
                                                 <span>{word.text}</span>
                                             </span>
@@ -89,7 +99,7 @@ const Hero = () => {
                             <h1>That Deliver Results</h1>
                         </div>
 
-                        <p className="hero-subtitle pointer-events-none text-white-50 relative z-9 md:text-xl text-lg">
+                        <p className="hero-subtitle pointer-events-none text-white-50 relative z-9 md:text-xl desktop:text-[length:clamp(16px,1.6vw,20px)] text-lg">
                             I'm Isaac, A Front End Developer with a passion for <br />building innovative and user-friendly web applications
                         </p>
 
@@ -103,7 +113,13 @@ const Hero = () => {
 
                 {/*RIGHT CONTENT OF THE HERO SECTION*/}
                 <figure className="hero-3d-layout">
-                    <HeroExperience />
+                    {show3D && (
+                        <CanvasErrorBoundary>
+                            <Suspense fallback={null}>
+                                <HeroExperience />
+                            </Suspense>
+                        </CanvasErrorBoundary>
+                    )}
                 </figure>
             </div>
 

@@ -1,15 +1,15 @@
 import { useRef, useEffect } from "react"
 import { counterItems } from "../constants/index.js"
 import gsap from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
-
-// Register ScrollTrigger to detect scrolling
-gsap.registerPlugin(ScrollTrigger)
 
 /**
  * Individual animated number item.
- * Uses GSAP ScrollTrigger to count from 0 to the target value when the element comes into view.
- * 
+ * Counts from 0 to the target value once the element scrolls into view.
+ *
+ * This sits in the hero, which ships in the entry bundle, so it uses an
+ * IntersectionObserver rather than ScrollTrigger to keep that plugin out of
+ * the critical JavaScript.
+ *
  * @param {Object} props - Component properties.
  * @param {Object} props.item - The data object containing the value, suffix, and label.
  */
@@ -17,29 +17,33 @@ const CounterItem = ({ item }) => {
     const numberRef = useRef(null)
 
     useEffect(() => {
-        const obj = { val: 0 }
-        
-        const animation = gsap.to(obj, {
-            val: item.value,
-            duration: 2.7,
-            // Delay removed so it starts as soon as you scroll to it!
-            ease: "power2.out",
-            scrollTrigger: {
-                trigger: numberRef.current,
-                start: "top 90%", // Triggers when the element enters the bottom 10% of the screen
-                toggleActions: "play none none none" // Plays once
-            },
-            onUpdate: () => {
-                if (numberRef.current) {
-                    numberRef.current.innerText = Math.floor(obj.val) + (item.suffix || "")
-                }
-            }
-        })
+        const el = numberRef.current
+        if (!el) return
 
-        // Cleanup the ScrollTrigger instantly if the component unmouts
+        const obj = { val: 0 }
+        let animation
+
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (!entry.isIntersecting) return
+                observer.disconnect() // Plays once
+                animation = gsap.to(obj, {
+                    val: item.value,
+                    duration: 2.7,
+                    ease: "power2.out",
+                    onUpdate: () => {
+                        el.textContent = Math.floor(obj.val) + (item.suffix || "")
+                    }
+                })
+            },
+            // Same as ScrollTrigger's "top 90%": fire once the top enters the bottom 10% of the screen
+            { rootMargin: "0px 0px -10% 0px" }
+        )
+        observer.observe(el)
+
         return () => {
-            if (animation.scrollTrigger) animation.scrollTrigger.kill()
-            animation.kill()
+            observer.disconnect()
+            animation?.kill()
         }
     }, [item.value, item.suffix])
 
@@ -61,7 +65,7 @@ const CounterItem = ({ item }) => {
  */
 const AnimatedCounter = () => {
     return (
-        <div className="padding-x-lg xl:mt-0 mt-32" id="counter">
+        <div className="padding-x-lg desktop:mt-0 mt-32" id="counter">
             <div className="mx-auto grid-3-cols">
                 {counterItems.map((item) => (
                     <CounterItem key={item.label} item={item} />

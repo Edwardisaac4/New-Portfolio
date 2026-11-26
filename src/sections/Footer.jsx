@@ -141,7 +141,7 @@ const Footer = () => {
                       rel="noopener noreferrer"
                       className="group flex items-center gap-3 text-white transition-colors hover:text-blue-400"
                     >
-                      <img src={social.imgPath} alt={social.name} className="w-4 h-4 opacity-70 group-hover:opacity-100 transition-opacity" style={{ filter: "invert(1)" }} />
+                      <img src={social.imgPath} alt="" width={16} height={16} loading="lazy" className="w-4 h-4 opacity-70 group-hover:opacity-100 transition-opacity" style={{ filter: "invert(1)" }} />
                       <span className="text-lg relative overflow-hidden block h-[28px]">
                         <span className="block transition-transform duration-300 group-hover:-translate-y-full">
                           {social.name}
